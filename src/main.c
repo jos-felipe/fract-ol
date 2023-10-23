@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/23 14:51:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:22:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,25 @@ void ft_randomize(void* param)
 	}
 }
 
+void ft_whiteboard(void* param)
+{
+	mlx_image_t	*paper = param;
+	
+	for (int32_t i = 0; i < paper->width; ++i)
+	{
+		for (int32_t y = 0; y < paper->height; ++y)
+		{
+			uint32_t color = ft_pixel(
+				0xFF, // R
+				0xFF, // G
+				0xFF, // B
+				0xFF  // A
+			);
+			mlx_put_pixel(paper, i, y, color);
+		}
+	}
+}
+
 void ft_zmap(void* param)
 {
 	double		zoom;
@@ -59,7 +78,7 @@ void ft_zmap(void* param)
 		for (int32_t j = 0; j < image->height; ++j)
 		{
 			c = complex_init(zoom * i, zoom * j);
-			uint32_t color = ft_mandelbrot(&c);
+			uint32_t color = ft_mandelbrot(c);
 			// uint32_t color = ft_pixel(
 			// 	rand() % 0xFF, // R
 			// 	rand() % 0xFF, // G
@@ -112,11 +131,32 @@ void ft_hook(void* param)
 		image->instances[0].x += 5;
 }
 
+void ft_hook_paper(void	*param)
+{
+	
+	t_fractal	*fractal = param;
+	mlx_t		*mlx = fractal->mlx;
+	mlx_image_t	*paper = fractal->paper;
+	
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		paper->instances[0].y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		paper->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		paper->instances[0].x -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		paper->instances[0].x += 5;
+}
+
 // -----------------------------------------------------------------------------
 
 int32_t main(int32_t argc, const char* argv[])
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
+	mlx_image_t	*paper;
+	t_fractal	fractal;
 
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(SIZE, SIZE, "fract-ol", true)))
@@ -124,22 +164,37 @@ int32_t main(int32_t argc, const char* argv[])
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, SIZE, SIZE)))
+	if (!(image = mlx_new_image(mlx, 300, 500)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	if (!(paper = mlx_new_image(mlx, 500, 300)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	
+	if (mlx_image_to_window(mlx, image, SIZE/2 -150, SIZE/2 - 250) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, paper, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	fractal.mlx = mlx;
+	fractal.paper = paper;
+	mlx_loop_hook(mlx, ft_whiteboard, paper);
 	mlx_loop_hook(mlx, ft_randomize, mlx);
-	mlx_loop_hook(mlx, ft_hook, mlx);
-
+	//mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop_hook(mlx, ft_hook_paper, &fractal);
+	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
