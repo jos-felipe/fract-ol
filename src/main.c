@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/23 14:30:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:51:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define HEIGHT 512
 #define SIZE 720
 #define AXIS_LEN 3
+#define MAX_ITER 100
 
 static mlx_image_t* image;
 
@@ -92,7 +93,6 @@ uint32_t ft_mandelbrot(t_complex *c)
 		color = ft_pixel(0, 0, 0, 0);
 	else
 		color = ft_pixel(0, 0, 0, 0xFF);
-	
 	return (color);
 }
 
@@ -116,7 +116,7 @@ void ft_hook(void* param)
 
 int32_t main(int32_t argc, const char* argv[])
 {
-	mlx_t* mlx;
+	mlx_t	*mlx;
 
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(SIZE, SIZE, "fract-ol", true)))
