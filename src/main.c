@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/25 11:08:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:15:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,10 @@ uint32_t ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height)
 		i++;
 	}
 	if (i == fractal->iter_max)
-		color = ft_pixel(0, 0, 0, 0xFF);
+		color = ft_pixel(0x00, 0x00, 0x00, 0xFF);
 	else
-		color = ft_pixel(0, 0, 0, 0x00);
+		color = ft_pixel(0xFF, 0xFF, 0xFF, 0xFF);
 	return (color);
-}
-
-void ft_hook(void* param)
-{
-	mlx_t* mlx = param;
-
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
 }
 
 void ft_joystick(void	*param)
@@ -93,16 +77,13 @@ void ft_joystick(void	*param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fractal->mlx);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
-	{
-		zero_ref->y -= STEP;
-		fractal->offset->y += zero_ref->y / fractal->zoom;
-	}
+		fractal->offset->y -= STEP / fractal->zoom;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
-		fractal->canvas->instances[0].y += 5;
+		fractal->offset->y += STEP / fractal->zoom;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_LEFT))
-		fractal->canvas->instances[0].x -= 5;
+		fractal->offset->x += STEP / fractal->zoom;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
-		fractal->canvas->instances[0].x += 5;
+		fractal->offset->x -= STEP / fractal->zoom;
 }
 
 // -----------------------------------------------------------------------------
@@ -126,7 +107,7 @@ int32_t main(int32_t argc, const char* argv[])
 			puts("Usage: ./fractol [fractal]");
 			return (EXIT_FAILURE);
 		}
-		mlx = mlx_init(SIZE, SIZE, argv[1], true);
+		mlx = mlx_init(SIZE, SIZE, fractal.name, true);
 		if (!mlx)
 		{
 			puts(mlx_strerror(mlx_errno));

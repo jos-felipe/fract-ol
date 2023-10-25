@@ -7,11 +7,12 @@ void	ztrans(t_complex *c, t_fractal *fractal, uint32_t width, uint32_t height)
 	c->y = height / fractal->zoom * (-1) + fractal->offset->y;
 }
 
-void mandelbrot_init(t_fractal *fractal, char *name)
+void mandelbrot_init(t_fractal *fractal, const char *name)
 {	
 	fractal->name = name;
 	fractal->zoom = SIZE / 4.00;
-	complex_init(fractal->offset, -2.0, +2.0);
+	fractal->offset->x = -2.0;
+	fractal->offset->y = +2.0;
 	fractal->f = ft_mandelbrot;
 	fractal->iter_max = 100;
 }

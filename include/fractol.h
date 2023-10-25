@@ -30,17 +30,18 @@ typedef struct s_fractal
 	mlx_image_t	*canvas;
 	double		zoom;
 	t_complex	*offset;
-	uint32_t	(*f)(t_fractal *fractal, uint32_t width, uint32_t height);
-	char		*name;
+	uint32_t	(*f)(struct s_fractal *fractal, uint32_t width, uint32_t height);
+	const char	*name;
 	uint32_t	iter_max;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height);
 
+void		mandelbrot_init(t_fractal *fractal, const char *name);
+
 /// @brief Transforms the x-y coordinates of the current pixel to the x-y coordinates on the complex plane
 void		ztrans(t_complex *c, t_fractal *fractal, uint32_t width, uint32_t height);
 
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-void		mandelbrot_init(t_fractal *fractal, char *name);
 
 # endif
