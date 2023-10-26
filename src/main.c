@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/25 14:15:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:56:20 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,6 @@ uint32_t ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height)
 	return (color);
 }
 
-void ft_joystick(void	*param)
-{	
-	t_fractal		*fractal;
-	mlx_instance_t	*zero_ref;
-	
-	fractal = param;
-	zero_ref = &fractal->canvas->instances[0];
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(fractal->mlx);
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
-		fractal->offset->y -= STEP / fractal->zoom;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
-		fractal->offset->y += STEP / fractal->zoom;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_LEFT))
-		fractal->offset->x += STEP / fractal->zoom;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
-		fractal->offset->x -= STEP / fractal->zoom;
-}
-
-// -----------------------------------------------------------------------------
-
 int32_t main(int32_t argc, const char* argv[])
 {
 	mlx_t		*mlx;
@@ -130,6 +109,7 @@ int32_t main(int32_t argc, const char* argv[])
 		fractal.canvas = canvas;
 		mlx_loop_hook(mlx, ft_artist, &fractal);
 		mlx_loop_hook(mlx, ft_joystick, &fractal);
+		mlx_scroll_hook(mlx, ft_zoom, &fractal);
 		
 		mlx_loop(mlx);
 		mlx_terminate(mlx);
