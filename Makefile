@@ -1,5 +1,5 @@
 NAME	:= fractol
-CFLAGS	:= -Ofast
+CFLAGS	:= -g3
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 

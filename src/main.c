@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/26 11:56:20 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:40:41 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ uint32_t ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height)
 	if (i == fractal->iter_max)
 		color = ft_pixel(0x00, 0x00, 0x00, 0xFF);
 	else
-		color = ft_pixel(0xFF, 0xFF, 0xFF, 0xFF);
+		color = ft_bernstein_poly(i, fractal->iter_max);
 	return (color);
 }
 
