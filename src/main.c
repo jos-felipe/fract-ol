@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/26 20:40:41 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:30:32 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,25 @@
 void ft_artist(void* param)
 {
 	t_fractal	*fractal;
-	uint32_t	width;
-	uint32_t	height;
+	uint32_t	w;
+	uint32_t	h;
 	uint32_t	color;
+	t_complex	c;
 	
 	fractal = param;
-	width = 0;
-	while (width < fractal->canvas->width)
+	w = 0;
+	while (w < fractal->canvas->width)
 	{
-		height = 0;
-		while (height < fractal->canvas->height)
+		h = 0;
+		while (h < fractal->canvas->height)
 		{
-			color = fractal->f(fractal, width, height);
-			mlx_put_pixel(fractal->canvas, width, height, color);
-			height++;
+			ztrans(&c, fractal, w, h);
+			color = fractal->f(fractal, &c);
+			mlx_put_pixel(fractal->canvas, w, h, color);
+			h++;
 		}
-		width++;
+		w++;
 	}
-}
-
-uint32_t ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height)
-{
-	double		xtemp;
-	t_complex	z;
-	t_complex	c;
-	uint32_t 	color;
-	int32_t		i;
-	
-	z.x = 0;
-	z.y = 0;
-	ztrans(&c, fractal, width, height);
-	i = 0;
-	while (i < fractal->iter_max)
-	{
-		xtemp = z.x * z.x - z.y * z.y + c.x;
-		z.y = 2 * z.x * z.y + c.y;
-		z.x = xtemp;
-		if (z.x * z.x + z.y * z.y > 4)
-			break ;
-		i++;
-	}
-	if (i == fractal->iter_max)
-		color = ft_pixel(0x00, 0x00, 0x00, 0xFF);
-	else
-		color = ft_bernstein_poly(i, fractal->iter_max);
-	return (color);
 }
 
 int32_t main(int32_t argc, const char* argv[])
@@ -76,17 +50,17 @@ int32_t main(int32_t argc, const char* argv[])
 	if (argc > 1)
 	{
 		if (!ft_strncmp(argv[1], "mandelbrot", 10))
-			mandelbrot_init(&fractal, argv[1]);
+			mandelbrot_init(&fractal);
 		else if (!ft_strncmp(argv[1], "julia", 5))
 			fractal.f = ft_mandelbrot;
 		else if (!ft_strncmp(argv[1], "burningship", 11))
 			fractal.f = ft_mandelbrot;
 		else
 		{
-			puts("Usage: ./fractol [fractal]");
+			ft_putstr_fd("Usage: ./fractol [fractal]\n", 1);
 			return (EXIT_FAILURE);
 		}
-		mlx = mlx_init(SIZE, SIZE, fractal.name, true);
+		mlx = mlx_init(SIZE, SIZE, fractal.name, false);
 		if (!mlx)
 		{
 			puts(mlx_strerror(mlx_errno));

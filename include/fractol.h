@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/26 20:42:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:08:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,26 @@ typedef struct s_complex
 typedef struct s_fractal
 {
 	const char	*name;
-	mlx_t		*mlx;
-	mlx_image_t	*canvas;
-	uint32_t	(*f)(struct s_fractal *fractal, uint32_t width, uint32_t height);
+	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
-	double		x_zoom;
-	double		y_zoom;
 	double		rmax;
 	double		rmin;
 	double		imax;
 	double		imin;
+	double		x_zoom;
+	double		y_zoom;
+	mlx_t		*mlx;
+	mlx_image_t	*canvas;
 }	t_fractal;
 
-uint32_t	ft_mandelbrot(t_fractal *fractal, uint32_t width, uint32_t height);
+uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 
-void		mandelbrot_init(t_fractal *fractal, const char *name);
+void		mandelbrot_init(t_fractal *fractal);
 
-/// @brief Transforms the current pixel position into a point on the complex domain
-void		ztrans(t_complex *c, t_fractal *fractal, uint32_t width, uint32_t height);
+/// @brief Transforms the current pixel position into a point on the z domain
+/// @param c A pointer to the complex number to be transformed
+
+void		ztrans(t_complex *c, t_fractal *fractal, uint32_t w, uint32_t h);
 
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
