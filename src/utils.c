@@ -6,17 +6,24 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/30 16:58:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:01:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 #include <stdio.h>
 
+/**
+* @brief Transforms the current pixel position into a point on the z domain
+* @param c The complex number which receives the transformed coordinates
+* @param fractal The fractal instance
+* @param w The current pixel's width
+* @param h The current pixel's height
+*/
 void	ztrans(t_complex *c, t_fractal *fractal, uint32_t w, uint32_t h)
 {
-	c->x = (+1.0) * fractal->x_zoom * w  + fractal->rmin;
-	c->y = (-1.0) * fractal->y_zoom * h + fractal->imax;
+	c->x = (+1.0) * fractal->a * w + fractal->b.x;
+	c->y = (-1.0) * fractal->a * h + fractal->b.y;
 }
 
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)

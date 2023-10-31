@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/30 12:08:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:03:37 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,23 @@ typedef struct s_complex
 /**
  * @brief A structure to store the characteristics of the fractal
  * 
+ * @param name The fractal's name
+ * @param f The function which identify if a point belongs to the set or not
+ * @param iter_max The maximum number of iterations
+ * @param axis_len The length of the axis in z-plane
+ * @param a The zoom factor
+ * @param b The x-y coordinates in z-plane of canvas upper-left corner (0,0)
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
- * @param zoom The zoom factor
- * @param offset The position on complex plane corresponding to the canvas upper-left corner 
- * @param f The function address which performs the color calculation
- * @param name The fractal's name
- * @param iter_max The maximum number of iterations
  */ 
 typedef struct s_fractal
 {
 	const char	*name;
 	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
-	double		rmax;
-	double		rmin;
-	double		imax;
-	double		imin;
-	double		x_zoom;
-	double		y_zoom;
+	double		axis_len;
+	double		a;
+	t_complex	b;
 	mlx_t		*mlx;
 	mlx_image_t	*canvas;
 }	t_fractal;
@@ -54,9 +52,6 @@ typedef struct s_fractal
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 
 void		mandelbrot_init(t_fractal *fractal);
-
-/// @brief Transforms the current pixel position into a point on the z domain
-/// @param c A pointer to the complex number to be transformed
 
 void		ztrans(t_complex *c, t_fractal *fractal, uint32_t w, uint32_t h);
 
