@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/30 17:30:32 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:35:20 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int32_t main(int32_t argc, const char* argv[])
 	if (argc > 1)
 	{
 		if (!ft_strncmp(argv[1], "mandelbrot", 10))
-			mandelbrot_init(&fractal);
+			fractal.init = mandelbrot_init;
 		else if (!ft_strncmp(argv[1], "julia", 5))
-			fractal.f = ft_mandelbrot;
+			fractal.init = julia_init;
 		else if (!ft_strncmp(argv[1], "burningship", 11))
-			fractal.f = ft_mandelbrot;
+			fractal.init = mandelbrot_init;
 		else
 		{
 			ft_putstr_fd("Usage: ./fractol [fractal]\n", 1);
@@ -79,8 +79,7 @@ int32_t main(int32_t argc, const char* argv[])
 			puts(mlx_strerror(mlx_errno));
 			return(EXIT_FAILURE);
 		}
-		fractal.mlx = mlx;
-		fractal.canvas = canvas;
+		fractal.init(&fractal, mlx, canvas);
 		mlx_loop_hook(mlx, ft_artist, &fractal);
 		mlx_loop_hook(mlx, ft_joystick, &fractal);
 		mlx_scroll_hook(mlx, ft_zoom, &fractal);

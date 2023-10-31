@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/30 23:03:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:42:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,25 @@ typedef struct s_complex
  */ 
 typedef struct s_fractal
 {
+	void		(*init)(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
 	const char	*name;
 	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
 	double		axis_len;
 	double		a;
 	t_complex	b;
-	mlx_t		*mlx;
-	mlx_image_t	*canvas;
+	mlx_t 		*mlx;
+	mlx_image_t	*canvas
+	t_complex	c;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 
-void		mandelbrot_init(t_fractal *fractal);
+uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
+
+void		mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
+
+void		julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
 
 void		ztrans(t_complex *c, t_fractal *fractal, uint32_t w, uint32_t h);
 
