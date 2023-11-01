@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/31 16:37:54 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:34:38 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas)
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
 	fractal->b.y = 0.0 + fractal->axis_len / 2.0;
+	fractal->k = 0;
 	fractal->mlx = mlx;
 	fractal->canvas = canvas;
 }
@@ -36,6 +37,9 @@ void	julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t *canvas)
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
 	fractal->b.y = 0.0 + fractal->axis_len / 2.0;
+	fractal->c.x = -0.7;
+	fractal->c.y = 0.27015;
+	fractal->k = 0;
 	fractal->mlx = mlx;
 	fractal->canvas = canvas;
 }

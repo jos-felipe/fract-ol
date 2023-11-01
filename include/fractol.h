@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/31 16:42:15 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:33:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 
 #define SIZE 720
 #define STEP 100
+
+typedef struct s_pixel
+{
+	uint32_t w;
+	uint32_t h;
+	uint32_t color;
+}	t_pixel;
 
 typedef struct s_complex
 {
@@ -34,6 +41,8 @@ typedef struct s_complex
  * @param axis_len The length of the axis in z-plane
  * @param a The zoom factor
  * @param b The x-y coordinates in z-plane of canvas upper-left corner (0,0)
+ * @param c The x-y coordinates in z-plane of the constant c in Julia set
+ * @param k The color index
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
  */ 
@@ -46,9 +55,10 @@ typedef struct s_fractal
 	double		axis_len;
 	double		a;
 	t_complex	b;
+	t_complex	c;
+	uint32_t	k;
 	mlx_t 		*mlx;
 	mlx_image_t	*canvas
-	t_complex	c;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
@@ -59,7 +69,7 @@ void		mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
 
 void		julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
 
-void		ztrans(t_complex *c, t_fractal *fractal, uint32_t w, uint32_t h);
+void		ztrans(t_fractal *fractal, t_pixel *pixel, t_complex *z);
 
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
@@ -67,6 +77,6 @@ void		ft_zoom(double xdelta, double ydelta, void* param);
 
 void		ft_joystick(void *param);
 
-int32_t		ft_bernstein_poly(uint32_t i, uint32_t iter_max);
+int32_t		ft_bernstein_poly(uint32_t i, uint32_t iter_max, uint32_t k);
 
 # endif

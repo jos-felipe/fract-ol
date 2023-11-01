@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/31 16:35:20 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:02:55 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,30 @@
 void ft_artist(void* param)
 {
 	t_fractal	*fractal;
-	uint32_t	w;
-	uint32_t	h;
-	uint32_t	color;
-	t_complex	c;
+	t_pixel		pixel;
+	t_complex	z;
 	
 	fractal = param;
-	w = 0;
-	while (w < fractal->canvas->width)
+	pixel.h = 0;
+	while (pixel.h < fractal->canvas->height)
 	{
-		h = 0;
-		while (h < fractal->canvas->height)
+		pixel.w = 0;
+		while (pixel.w < fractal->canvas->width)
 		{
-			ztrans(&c, fractal, w, h);
-			color = fractal->f(fractal, &c);
-			mlx_put_pixel(fractal->canvas, w, h, color);
-			h++;
+			ztrans(fractal, &pixel, &z);
+			pixel.color = fractal->f(fractal, &z);
+			mlx_put_pixel(fractal->canvas, pixel.w, pixel.h, pixel.color);
+			pixel.w++;
 		}
-		w++;
+		pixel.h++;
 	}
 }
 
 int32_t main(int32_t argc, const char* argv[])
 {
+	t_fractal	fractal;
 	mlx_t		*mlx;
 	mlx_image_t	*canvas;
-	t_fractal	fractal;
 
 	if (argc > 1)
 	{
