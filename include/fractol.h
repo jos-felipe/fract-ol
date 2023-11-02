@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/01 14:33:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:23:01 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_pixel
 {
-	uint32_t w;
-	uint32_t h;
+	int32_t w;
+	int32_t h;
 	uint32_t color;
 }	t_pixel;
 
@@ -31,6 +31,13 @@ typedef struct s_complex
 	double x;
 	double y;
 }	t_complex;
+
+typedef struct s_channel
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+}	t_channel;
 
 /**
  * @brief A structure to store the characteristics of the fractal
@@ -48,7 +55,7 @@ typedef struct s_complex
  */ 
 typedef struct s_fractal
 {
-	void		(*init)(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
+	void		(*init)(struct s_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
 	const char	*name;
 	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
@@ -56,27 +63,20 @@ typedef struct s_fractal
 	double		a;
 	t_complex	b;
 	t_complex	c;
-	uint32_t	k;
+	t_channel	ch;
 	mlx_t 		*mlx;
-	mlx_image_t	*canvas
+	mlx_image_t	*canvas;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
-
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
-
 void		mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
-
 void		julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
-
 void		ztrans(t_fractal *fractal, t_pixel *pixel, t_complex *z);
-
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-
 void		ft_zoom(double xdelta, double ydelta, void* param);
-
 void		ft_joystick(void *param);
-
-int32_t		ft_bernstein_poly(uint32_t i, uint32_t iter_max, uint32_t k);
+int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
+void		ft_shift(t_channel *ch);
 
 # endif

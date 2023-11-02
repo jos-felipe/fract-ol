@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/01 14:47:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:54:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@ void	ft_zoom(double xdelta, double ydelta, void* param)
 	d.x = pointer.x - fractal->b.x;
 	d.y = fractal->b.y - pointer.y;
 	if (ydelta > 0)
-		fractal->axis_len *= 0.90;
+	{
+		fractal->axis_len *= 0.9;
+		fractal->b.x += d.x / 10;
+		fractal->b.y -= d.y / 10;
+	}
 	else if (ydelta < 0)
-		fractal->axis_len *= 1.10;
+	{
+		fractal->axis_len *= 1.1;
+		fractal->b.x -= d.x / 10;
+		fractal->b.y += d.y / 10;
+	}
 	fractal->a = fractal->axis_len / SIZE;
-	fractal->b.x += d.x / 10;
-	fractal->b.y -= d.y / 10;
 	printf("w: %d, h: %d, zoom: %f\n", pixel.w, pixel.h, 1 / fractal->a);
 }
 
@@ -45,13 +51,13 @@ void	ft_joystick(void *param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_R))
 		fractal->init(fractal, fractal->mlx, fractal->canvas);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_SPACE))
-		fractal->k++;
+		ft_shift(&fractal->ch);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
-		fractal->b.y -= fractal->a * STEP;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
 		fractal->b.y += fractal->a * STEP;
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
+		fractal->b.y -= fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_LEFT))
-		fractal->b.x += fractal->a * STEP;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
 		fractal->b.x -= fractal->a * STEP;
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
+		fractal->b.x += fractal->a * STEP;
 }

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/01 11:02:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:22:29 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void ft_artist(void* param)
 	
 	fractal = param;
 	pixel.h = 0;
-	while (pixel.h < fractal->canvas->height)
+	while (pixel.h < SIZE)
 	{
 		pixel.w = 0;
-		while (pixel.w < fractal->canvas->width)
+		while (pixel.w < SIZE)
 		{
 			ztrans(fractal, &pixel, &z);
 			pixel.color = fractal->f(fractal, &z);
@@ -47,9 +47,9 @@ int32_t main(int32_t argc, const char* argv[])
 
 	if (argc > 1)
 	{
-		if (!ft_strncmp(argv[1], "mandelbrot", 10))
+		if (!ft_strncmp(argv[1], "Mandelbrot", 10))
 			fractal.init = mandelbrot_init;
-		else if (!ft_strncmp(argv[1], "julia", 5))
+		else if (!ft_strncmp(argv[1], "Julia", 5))
 			fractal.init = julia_init;
 		else if (!ft_strncmp(argv[1], "burningship", 11))
 			fractal.init = mandelbrot_init;
@@ -58,7 +58,7 @@ int32_t main(int32_t argc, const char* argv[])
 			ft_putstr_fd("Usage: ./fractol [fractal]\n", 1);
 			return (EXIT_FAILURE);
 		}
-		mlx = mlx_init(SIZE, SIZE, fractal.name, false);
+		mlx = mlx_init(SIZE, SIZE, argv[1], false);
 		if (!mlx)
 		{
 			puts(mlx_strerror(mlx_errno));
