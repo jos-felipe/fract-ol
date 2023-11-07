@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/02 15:23:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:20:42 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 #include "../include/fractol.h"
 
-void	mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas)
+void	mandelbrot_init(t_fractal *fractal)
 {	
-	fractal->name = "mandelbrot";
 	fractal->f = ft_mandelbrot;
 	fractal->iter_max = 100;
 	fractal->axis_len = 4.0;
@@ -26,13 +25,10 @@ void	mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas)
 	fractal->ch.r = 0;
 	fractal->ch.g = 1;
 	fractal->ch.b = 2;
-	fractal->mlx = mlx;
-	fractal->canvas = canvas;
 }
 
-void	julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t *canvas)
+void	julia_init(t_fractal *fractal)
 {	
-	fractal->name = "julia";
 	fractal->f = ft_julia;
 	fractal->iter_max = 100;
 	fractal->axis_len = 4.0;
@@ -44,6 +40,16 @@ void	julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t *canvas)
 	fractal->ch.r = 0;
 	fractal->ch.g = 1;
 	fractal->ch.b = 2;
-	fractal->mlx = mlx;
-	fractal->canvas = canvas;
+}
+
+void	julia_multiset(t_complex *c, int i)
+{
+	t_complex	tmp[3];
+
+	ft_complex(&tmp[0], 0.285, 0.01);
+	ft_complex(&tmp[1], -0.8, 0.156);
+	ft_complex(&tmp[2], 0.4, 0.4);
+	if (i < 0 || i > 2)
+		return ;
+	c = &tmp[i];
 }

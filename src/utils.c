@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/02 14:30:38 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:15:17 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,10 @@ void	ft_shift(t_channel *ch)
 	ch->r = ch->g;
 	ch->g = ch->b;
 	ch->b = tmp;
+}
+
+void	ft_complex(t_complex *z, double x, double y)
+{
+	z->x = x;
+	z->y = y;
 }

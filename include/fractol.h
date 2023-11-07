@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/02 15:23:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:21:22 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_channel
  */ 
 typedef struct s_fractal
 {
-	void		(*init)(struct s_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
-	const char	*name;
 	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
 	double		axis_len;
@@ -70,13 +68,15 @@ typedef struct s_fractal
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
-void		mandelbrot_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
-void		julia_init(t_fractal *fractal, mlx_t *mlx, mlx_image_t	*canvas);
+void		mandelbrot_init(t_fractal *fractal);
+void		julia_init(t_fractal *fractal);
+void		julia_multiset(t_complex *c, int i);
 void		ztrans(t_fractal *fractal, t_pixel *pixel, t_complex *z);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void* param);
 void		ft_joystick(void *param);
 int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
 void		ft_shift(t_channel *ch);
+void		ft_complex(t_complex *z, double x, double y);
 
 # endif
