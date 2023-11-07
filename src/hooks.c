@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/10/26 20:29:11 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:54:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,29 @@
 void	ft_zoom(double xdelta, double ydelta, void* param)
 {
 	t_fractal	*fractal;
-	int32_t		x;
-	int32_t		y;
-	t_complex	c;
+	t_pixel		pixel;
+	t_complex	pointer;
+	t_complex	d;
 	
 	fractal = param;
-	mlx_get_mouse_pos(fractal->mlx, &x, &y);
-	ztrans(&c, fractal, x, y);
+	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
+	ztrans(fractal, &pixel, &pointer);
+	d.x = pointer.x - fractal->b.x;
+	d.y = fractal->b.y - pointer.y;
 	if (ydelta > 0)
 	{
-		fractal->x_zoom *= 1.1;
-		fractal->y_zoom *= 1.1;
+		fractal->axis_len *= 0.9;
+		fractal->b.x += d.x / 10;
+		fractal->b.y -= d.y / 10;
 	}
 	else if (ydelta < 0)
 	{
-		fractal->x_zoom *= 0.9;
-		fractal->y_zoom *= 0.9;
+		fractal->axis_len *= 1.1;
+		fractal->b.x -= d.x / 10;
+		fractal->b.y += d.y / 10;
 	}
-	printf("x: %d, y: %d, z: %f\n", x, y, fractal->y_zoom);
+	fractal->a = fractal->axis_len / SIZE;
+	printf("w: %d, h: %d, zoom: %f\n", pixel.w, pixel.h, 1 / fractal->a);
 }
 
 void	ft_joystick(void *param)
@@ -43,12 +48,16 @@ void	ft_joystick(void *param)
 	fractal = param;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fractal->mlx);
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_R))
+		fractal->init(fractal, fractal->mlx, fractal->canvas);
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_SPACE))
+		ft_shift(&fractal->ch);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
-		fractal->imax += STEP / fractal->y_zoom;
+		fractal->b.y += fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
-		fractal->imax -= STEP / fractal->y_zoom;
+		fractal->b.y -= fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_LEFT))
-		fractal->rmin -= STEP / fractal->x_zoom;
+		fractal->b.x -= fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
-		fractal->rmin += STEP / fractal->x_zoom;
+		fractal->b.x += fractal->a * STEP;
 }
