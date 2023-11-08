@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 12:43:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:51:24 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	return (color);
 }
 
-int			julia_multiset(t_complex *c, int i)
+void		julia_sets(t_complex *c, int i)
 {
-	t_complex	tmp[3];
+	t_complex	tmp[4];
 
-	ft_complex(&tmp[0], 0.285, 0.01);
-	ft_complex(&tmp[1], -0.8, 0.156);
-	ft_complex(&tmp[2], 0.4, 0.4);
-	if (i < 0 || i > 2)
+	ft_complex(&tmp[0], -0.7, 0.27015);
+	ft_complex(&tmp[1], 0.285, 0.01);
+	ft_complex(&tmp[2], -0.8, 0.156);
+	ft_complex(&tmp[3], 0.4, 0.4);
+	if (i < 0 || i > 3)
 		return ;
 	c->x = tmp[i].x;
 	c->y = tmp[i].y;
-	return (EXIT_SUCCESS);
 }

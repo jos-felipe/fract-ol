@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 12:43:20 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:47:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	julia_init(t_fractal *fractal)
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
 	fractal->b.y = 0.0 + fractal->axis_len / 2.0;
-	fractal->c.x = -0.7;
-	fractal->c.y = 0.27015;
 	fractal->ch.r = 0;
 	fractal->ch.g = 1;
 	fractal->ch.b = 2;
+	fractal->j = 0;
+	julia_sets(&fractal->c, fractal->j);
 	return (EXIT_SUCCESS);
 }
 
@@ -55,7 +55,7 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 			{
 				status = julia_init(fractal);
 				if (argc > 2)
-					status = julia_multiset(&fractal->c, ft_atoi(argv[2]) - 1);
+					julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
 			}	
 			else if (!ft_strncmp(argv[1], "burningship", 11))
 				status = EXIT_SUCCESS;

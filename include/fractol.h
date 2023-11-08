@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 12:41:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:52:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_channel
  * @param b The x-y coordinates in z-plane of canvas upper-left corner (0,0)
  * @param c The x-y coordinates in z-plane of the constant c in Julia set
  * @param ch The three color channels RGB
+ * @param j The Julia constant selector
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
  */ 
@@ -61,6 +62,7 @@ typedef struct s_fractal
 	t_complex	b;
 	t_complex	c;
 	t_channel	ch;
+	int			j;
 	mlx_t 		*mlx;
 	mlx_image_t	*canvas;
 }	t_fractal;
@@ -69,13 +71,14 @@ uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
 int			mandelbrot_init(t_fractal *fractal);
 int			julia_init(t_fractal *fractal);
-int			julia_multiset(t_complex *c, int i);
+void		julia_sets(t_complex *c, int i);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal, mlx_t	*mlx, mlx_image_t *canvas);
 void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void* param);
 void		ft_joystick(void *param);
+void		ft_julia_c(t_fractal *fractal)
 int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
