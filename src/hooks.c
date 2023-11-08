@@ -6,25 +6,24 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/07 18:18:57 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:40:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-#include <stdio.h>
 
 void	ft_zoom(double xdelta, double ydelta, void* param)
 {
 	t_fractal	*fractal;
 	t_pixel		pixel;
-	t_complex	pointer;
+	t_complex	cursor;
 	t_complex	d;
 	
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
-	ztrans(fractal, &pixel, &pointer);
-	d.x = pointer.x - fractal->b.x;
-	d.y = fractal->b.y - pointer.y;
+	ztrans(&cursor, fractal, &pixel);
+	d.x = cursor.x - fractal->b.x;
+	d.y = fractal->b.y - cursor.y;
 	if (ydelta > 0)
 	{
 		fractal->axis_len *= 0.9;
@@ -38,7 +37,6 @@ void	ft_zoom(double xdelta, double ydelta, void* param)
 		fractal->b.y += d.y / 10;
 	}
 	fractal->a = fractal->axis_len / SIZE;
-	printf("w: %d, h: %d, zoom: %f\n", pixel.w, pixel.h, 1 / fractal->a);
 }
 
 void	ft_joystick(void *param)

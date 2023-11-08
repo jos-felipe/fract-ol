@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/07 18:21:22 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:41:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ typedef struct s_channel
 /**
  * @brief A structure to store the characteristics of the fractal
  * 
- * @param name The fractal's name
- * @param f The function which identify if a point belongs to the set or not
+ * @param f The function which calculates if a point belongs to the set or not
  * @param iter_max The maximum number of iterations
  * @param axis_len The length of the axis in z-plane
  * @param a The zoom factor
  * @param b The x-y coordinates in z-plane of canvas upper-left corner (0,0)
  * @param c The x-y coordinates in z-plane of the constant c in Julia set
- * @param k The color index
+ * @param ch The three color channels RGB
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
  */ 
@@ -68,10 +67,12 @@ typedef struct s_fractal
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
-void		mandelbrot_init(t_fractal *fractal);
-void		julia_init(t_fractal *fractal);
-void		julia_multiset(t_complex *c, int i);
-void		ztrans(t_fractal *fractal, t_pixel *pixel, t_complex *z);
+int			mandelbrot_init(t_fractal *fractal);
+int			julia_init(t_fractal *fractal);
+int			julia_multiset(t_complex *c, int i);
+int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
+int			graphics_init(t_fractal *fractal, mlx_t	*mlx, mlx_image_t *canvas);
+void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void* param);
 void		ft_joystick(void *param);

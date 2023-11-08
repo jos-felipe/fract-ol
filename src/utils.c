@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/07 17:15:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:07:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 #include <stdio.h>
 
 /**
-* @brief Transforms the current pixel position into a point on the z domain.
+* @brief Transforms the current pixel position into a point on the z-plane.
 * The linear transformation uses the line equation form of y = a * x + b.
 * The y-axis is inverted to match the z-plane's orientation.
+* @param z The complex variable which receives the transformed coordinates
 * @param fractal The fractal instance
 * @param pixel The current pixel
-* @param z The complex variable which receives the transformed coordinates
 */
-void		ztrans(t_fractal *fractal, t_pixel *pixel, t_complex *z)
+void	ztrans( t_complex *z, t_fractal *fractal, t_pixel *pixel)
 {
 	z->x = (+1.0) * fractal->a * pixel->w + fractal->b.x;
 	z->y = (-1.0) * fractal->a * pixel->h + fractal->b.y;
 }
 
-int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int32_t		ft_bernstein_poly(uint32_t i, t_fractal * fractal)
+int32_t	ft_bernstein_poly(uint32_t i, t_fractal * fractal)
 {
 	double		t;
 	int32_t		poly[3];
