@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 17:52:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:45:45 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #define SIZE 720
 #define STEP 100
@@ -55,6 +58,7 @@ typedef struct s_channel
  */ 
 typedef struct s_fractal
 {
+	const char	*name;
 	uint32_t	(*f)(struct s_fractal *fractal, t_complex *c);
 	uint32_t	iter_max;
 	double		axis_len;
@@ -69,8 +73,8 @@ typedef struct s_fractal
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
-int			mandelbrot_init(t_fractal *fractal);
-int			julia_init(t_fractal *fractal);
+int			mandelbrot_init(t_fractal *fractal, const char *name);
+int			julia_init(t_fractal *fractal, const char *name);
 void		julia_sets(t_complex *c, int i);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal, mlx_t	*mlx, mlx_image_t *canvas);
@@ -78,9 +82,10 @@ void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void* param);
 void		ft_joystick(void *param);
-void		ft_julia_c(t_fractal *fractal)
+void		ft_julia_c(t_fractal *fractal);
 int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
+void		ft_puts(const char *str);
 
 # endif

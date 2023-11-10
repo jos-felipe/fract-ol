@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 12:32:27 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:48:35 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../include/fractol.h"
 
+void	ft_puts(const char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+	write(1, "\n", 1);
+}
 
 void ft_artist(void* param)
 {
@@ -47,13 +53,17 @@ int32_t main(int32_t argc, const char* argv[])
 
 	if (ft_args(&fractal, argc, argv))
 	{
-		ft_putstr_fd("Usage: ./fractol [Mandelbrot|Julia] {1..3}\n", 1);
+		ft_puts("Usage: ./fractol [ Mandelbrot|Julia ] {1..4}");
 		return (EXIT_FAILURE);
+	}
+	mlx = mlx_init(SIZE, SIZE, fractal.name, false);
+	if (!mlx)
+	{
+		ft_puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
 	}
 	if (graphics_init(&fractal, mlx, canvas))
 		return (EXIT_FAILURE);
-	fractal.mlx = mlx;
-	fractal.canvas = canvas;
 	mlx_loop_hook(mlx, ft_artist, &fractal);
 	mlx_loop_hook(mlx, ft_joystick, &fractal);
 	mlx_scroll_hook(mlx, ft_zoom, &fractal);

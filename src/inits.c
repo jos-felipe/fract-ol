@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 17:47:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:45:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int	mandelbrot_init(t_fractal *fractal)
+int	mandelbrot_init(t_fractal *fractal, const char *name)
 {	
+	fractal->name = name;
 	fractal->f = ft_mandelbrot;
 	fractal->iter_max = 100;
 	fractal->axis_len = 4.0;
@@ -26,8 +27,9 @@ int	mandelbrot_init(t_fractal *fractal)
 	return (EXIT_SUCCESS);
 }
 
-int	julia_init(t_fractal *fractal)
+int	julia_init(t_fractal *fractal, const char *name)
 {	
+	fractal->name = ft_strdup(name);
 	fractal->f = ft_julia;
 	fractal->iter_max = 100;
 	fractal->axis_len = 4.0;
@@ -50,10 +52,10 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 	if (argc > 1)
 		{
 			if (!ft_strncmp(argv[1], "Mandelbrot", 10))
-				status = mandelbrot_init(fractal);
+				status = mandelbrot_init(fractal, argv[1]);
 			else if (!ft_strncmp(argv[1], "Julia", 5))
 			{
-				status = julia_init(fractal);
+				status = julia_init(fractal, argv[1]);
 				if (argc > 2)
 					julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
 			}	
@@ -65,24 +67,20 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 
 int	graphics_init(t_fractal *fractal, mlx_t	*mlx, mlx_image_t *canvas)
 {
-	mlx = mlx_init(SIZE, SIZE, "fract-ol", false);
-	if (!mlx)
-	{
-		ft_putstr_fd(mlx_strerror(mlx_errno), 1);
-		return(EXIT_FAILURE);
-	}
 	canvas = mlx_new_image(mlx, SIZE, SIZE);
 	if (!canvas)
 	{
 		mlx_close_window(mlx);
-		ft_putstr_fd(mlx_strerror(mlx_errno), 1);
+		ft_puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
 	if (mlx_image_to_window(mlx, canvas, 0, 0) == -1)
 	{
 		mlx_close_window(mlx);
-		ft_putstr_fd(mlx_strerror(mlx_errno), 1);
+		ft_puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+	fractal->mlx = mlx;
+	fractal->canvas = canvas;
 	return (EXIT_SUCCESS);
 }
