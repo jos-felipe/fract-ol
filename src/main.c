@@ -6,14 +6,10 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 17:51:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:15:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
- 
-#include <stdbool.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../include/fractol.h"
 
 void	ft_puts(const char *str)
@@ -51,7 +47,8 @@ int32_t	main(int32_t argc, const char *argv[])
 
 	if (ft_args(&fractal, argc, argv))
 	{
-		ft_puts("Usage: ./fractol [ Mandelbrot|Julia ] {1..4}");
+		ft_puts("Usage: ./fractol Mandelbrot");
+		ft_puts("Usage: ./fractol Julia {1..4}");
 		return (EXIT_FAILURE);
 	}
 	if (graphics_init(&fractal))
