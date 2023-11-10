@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 15:45:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:50:11 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			mandelbrot_init(t_fractal *fractal, const char *name);
 int			julia_init(t_fractal *fractal, const char *name);
 void		julia_sets(t_complex *c, int i);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
-int			graphics_init(t_fractal *fractal, mlx_t	*mlx, mlx_image_t *canvas);
+int			graphics_init(t_fractal *fractal);
 void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void* param);

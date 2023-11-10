@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 12:07:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:05:24 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-#include <stdio.h>
 
 /**
 * @brief Transforms the current pixel position into a point on the z-plane.
@@ -32,7 +31,7 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int32_t	ft_bernstein_poly(uint32_t i, t_fractal * fractal)
+int32_t	ft_bernstein_poly(uint32_t i, t_fractal *fractal)
 {
 	double		t;
 	int32_t		poly[3];

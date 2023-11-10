@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 17:51:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:03:56 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Mathemathical representation of fractal sets
+// Mathematical models for fractal sets
 
 #include "../include/fractol.h"
 
@@ -20,7 +20,7 @@ uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 	t_complex	z;
 	uint32_t	color;
 	int32_t		i;
-	
+
 	z.x = 0;
 	z.y = 0;
 	i = 0;

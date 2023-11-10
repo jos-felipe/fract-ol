@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/08 17:52:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:07:46 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	ft_zoom(double xdelta, double ydelta, void* param)
+void	ft_zoom(double xdelta, double ydelta, void *param)
 {
 	t_fractal	*fractal;
 	t_pixel		pixel;
 	t_complex	cursor;
 	t_complex	d;
-	
+
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
 	ztrans(&cursor, fractal, &pixel);
@@ -42,7 +42,7 @@ void	ft_zoom(double xdelta, double ydelta, void* param)
 void	ft_joystick(void *param)
 {	
 	t_fractal	*fractal;
-	
+
 	fractal = param;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fractal->mlx);
