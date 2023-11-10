@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/02 14:31:35 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:57:57 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Mathemathical representation of fractal sets
+// Mathematical models for fractal sets
 
 #include "../include/fractol.h"
 
@@ -20,7 +20,7 @@ uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 	t_complex	z;
 	uint32_t	color;
 	int32_t		i;
-	
+
 	z.x = 0;
 	z.y = 0;
 	i = 0;
@@ -45,7 +45,7 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	double		xtemp;
 	uint32_t	color;
 	int32_t		i;
-	
+
 	i = 0;
 	while (i < fractal->iter_max)
 	{
@@ -61,4 +61,18 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	else
 		color = ft_bernstein_poly(i, fractal);
 	return (color);
+}
+
+void	julia_sets(t_complex *c, int i)
+{
+	t_complex	tmp[4];
+
+	ft_complex(&tmp[0], -0.7, 0.27015);
+	ft_complex(&tmp[1], 0.285, 0.01);
+	ft_complex(&tmp[2], -0.8, 0.156);
+	ft_complex(&tmp[3], 0.4, 0.4);
+	if (i < 0 || i > 3)
+		return ;
+	c->x = tmp[i].x;
+	c->y = tmp[i].y;
 }
