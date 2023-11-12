@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 17:57:57 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/11 20:12:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 	if (i == fractal->iter_max)
 		color = ft_pixel(0x00, 0x00, 0x00, 0xFF);
 	else
-		color = ft_bernstein_poly(i, fractal);
+		// color = ft_bernstein_poly(i, fractal);
+		color = ft_bernstein_poly(1.0 * i / fractal->iter_max, fractal->rgb);
 	return (color);
 }
 

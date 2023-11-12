@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 18:07:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/11 20:44:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
 int	mandelbrot_init(t_fractal *fractal, const char *name)
-{	
+{
 	fractal->name = name;
 	fractal->f = ft_mandelbrot;
 	fractal->iter_max = 100;
@@ -24,6 +24,10 @@ int	mandelbrot_init(t_fractal *fractal, const char *name)
 	fractal->ch.r = 0;
 	fractal->ch.g = 1;
 	fractal->ch.b = 2;
+	fractal->rgb[0] = 0;
+	fractal->rgb[1] = 1;
+	fractal->rgb[2] = 2;
+	fractal->x = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -53,12 +57,12 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 	{
 		if (!ft_strncmp(argv[1], "Mandelbrot", 10))
 			status = mandelbrot_init(fractal, argv[1]);
-		else if (!ft_strncmp(argv[1], "Julia", 5))
+		/* else if (!ft_strncmp(argv[1], "Julia", 5))
 		{
 			status = julia_init(fractal, argv[1]);
 			if (argc > 2)
 				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
-		}	
+		}	 */
 		else if (!ft_strncmp(argv[1], "burningship", 11))
 			status = EXIT_SUCCESS;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 18:34:20 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:14:47 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_fractal
 	t_complex		b;
 	t_complex		c;
 	t_channel		ch;
+	int				rgb[3];
+	int				x;
 	int				j;
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
@@ -83,9 +85,11 @@ int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
 void		ft_joystick(void *param);
 void		ft_julia_c(t_fractal *fractal);
-int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
+// int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
+int32_t		ft_bernstein_poly(double t, int *rgb);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
 void		ft_puts(const char *str);
+void		ft_croupier(t_fractal *fr);
 
 #endif

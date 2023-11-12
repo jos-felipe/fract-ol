@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 16:05:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:14:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int32_t	ft_bernstein_poly(uint32_t i, t_fractal *fractal)
+/* int32_t	ft_bernstein_poly(uint32_t i, t_fractal *fractal)
 {
 	double		t;
 	int32_t		poly[3];
@@ -43,6 +43,16 @@ int32_t	ft_bernstein_poly(uint32_t i, t_fractal *fractal)
 	poly[1] = 255 * 9 * (1 - t) * t * t * t;
 	poly[2] = 255 * 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
 	return (ft_pixel(poly[ch->r], poly[ch->g], poly[ch->b], 255));
+} */
+
+int32_t	ft_bernstein_poly(double t, int *rgb)
+{
+	int32_t	poly[3];
+
+	poly[rgb[0]] = 255 * 15 * (1 - t) * (1 - t) * t * t;
+	poly[rgb[1]] = 255 * 9 * (1 - t) * t * t * t;
+	poly[rgb[2]] = 255 * 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
+	return (ft_pixel(poly[0], poly[1], poly[2], 255));
 }
 
 void	ft_shift(t_channel *ch)
@@ -60,3 +70,17 @@ void	ft_complex(t_complex *z, double x, double y)
 	z->x = x;
 	z->y = y;
 }
+
+void	ft_croupier(t_fractal *fr)
+{
+	int	tmp;
+
+	fr->x++;
+	if (fr->x > 1)
+		fr->x = 0;
+	tmp = fr->rgb[fr->x];
+	fr->rgb[fr->x] = fr->rgb[fr->x + 1];
+	fr->rgb[fr->x + 1] = tmp;
+}
+
+

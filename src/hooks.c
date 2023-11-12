@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/10 16:07:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:15:24 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	ft_joystick(void *param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fractal->mlx);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_SPACE))
-		ft_shift(&fractal->ch);
+		// ft_shift(&fractal->ch);
+		ft_croupier(fractal);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_C))
 		ft_julia_c(fractal);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
