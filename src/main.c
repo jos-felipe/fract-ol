@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/11 20:37:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:40:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@ void	ft_artist(void *param)
 	}
 }
 
-int32_t	main(int32_t argc, const char *argv[])
+int	main(int argc, const char *argv[])
 {
-	t_fractal	fractal;
+	t_fractal	fr;
 
-	if (ft_args(&fractal, argc, argv))
+	if (ft_args(&fr, argc, argv))
 	{
-		ft_puts("Usage: ./fractol Mandelbrot");
-		ft_puts("Usage: ./fractol Julia {1..4}");
+		ft_puts("Please enter one of the lines below:");
+		ft_puts("./fractol Mandelbrot");
+		ft_puts("./fractol Julia {1..4}");
 		return (EXIT_FAILURE);
 	}
-	if (graphics_init(&fractal))
+	if (graphics_init(&fr))
 		return (EXIT_FAILURE);
-	mlx_loop_hook(fractal.mlx, ft_artist, &fractal);
-	mlx_loop_hook(fractal.mlx, ft_joystick, &fractal);
-	mlx_scroll_hook(fractal.mlx, ft_zoom, &fractal);
-	mlx_loop(fractal.mlx);
-	mlx_terminate(fractal.mlx);
+	mlx_loop_hook(fr.mlx, ft_artist, &fr);
+	mlx_loop_hook(fr.mlx, ft_joystick, &fr);
+	mlx_scroll_hook(fr.mlx, ft_zoom, &fr);
+	mlx_loop(fr.mlx);
+	mlx_terminate(fr.mlx);
 	return (EXIT_SUCCESS);
 }

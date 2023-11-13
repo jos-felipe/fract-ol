@@ -5,17 +5,17 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "(lldb) Launch",
+			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/fractol",
-			"args": ["Julia"],
+			"args": ["Mandelbrot"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"preLaunchTask": "build",
-			"MIMode": "lldb"
+			"MIMode": "gdb"
 		}
 
 	]

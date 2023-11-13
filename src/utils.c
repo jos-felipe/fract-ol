@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/11 21:14:23 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:52:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_croupier(t_fractal *fr)
 {
 	int	tmp;
 
-	fr->x++;
+     	fr->x++;
 	if (fr->x > 1)
 		fr->x = 0;
 	tmp = fr->rgb[fr->x];
