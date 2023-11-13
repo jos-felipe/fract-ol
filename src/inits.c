@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/11 20:44:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:07:17 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	mandelbrot_init(t_fractal *fractal, const char *name)
 
 int	julia_init(t_fractal *fractal, const char *name)
 {	
-	fractal->name = ft_strdup(name);
+	fractal->name = name;
 	fractal->f = ft_julia;
 	fractal->iter_max = 100;
 	fractal->axis_len = 4.0;
@@ -43,6 +43,10 @@ int	julia_init(t_fractal *fractal, const char *name)
 	fractal->ch.r = 0;
 	fractal->ch.g = 1;
 	fractal->ch.b = 2;
+	fractal->rgb[0] = 0;
+	fractal->rgb[1] = 1;
+	fractal->rgb[2] = 2;
+	fractal->x = 0;
 	fractal->j = 0;
 	julia_sets(&fractal->c, fractal->j);
 	return (EXIT_SUCCESS);
@@ -57,12 +61,12 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 	{
 		if (!ft_strncmp(argv[1], "Mandelbrot", 10))
 			status = mandelbrot_init(fractal, argv[1]);
-		/* else if (!ft_strncmp(argv[1], "Julia", 5))
+		else if (!ft_strncmp(argv[1], "Julia", 5))
 		{
 			status = julia_init(fractal, argv[1]);
 			if (argc > 2)
 				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
-		}	 */
+		}	
 		else if (!ft_strncmp(argv[1], "burningship", 11))
 			status = EXIT_SUCCESS;
 	}

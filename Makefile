@@ -5,7 +5,12 @@ LIBFT	:= ./lib/libft
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a -ldl -lglfw -pthread -lm
-SRCS	:= $(shell find ./src -iname "*.c")
+# SRCS	:= $(shell find ./src -iname "*.c")
+SRCS	:=	./src/hooks.c	\
+			./src/inits.c	\
+			./src/main.c	\
+			./src/sets.c	\
+			./src/utils.c
 
 OBJS	:= ${SRCS:.c=.o}
 DEPS	:= ./include/fractol.h

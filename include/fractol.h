@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/11 21:14:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:53:11 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 # include <stdlib.h>
-# include <stdio.h>
 # include <stdbool.h>
 
 # define SIZE 720
-# define STEP 100
+# define STEP 36
 
 typedef struct s_pixel
 {
