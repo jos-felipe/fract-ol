@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sets.c                                             :+:      :+:    :+:   */
+/*   sets_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/12 17:17:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:57:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Mathematical models for fractal sets
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 {

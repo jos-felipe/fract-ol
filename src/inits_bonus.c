@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inits.c                                            :+:      :+:    :+:   */
+/*   inits_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/12 17:07:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:53:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
 
 int	mandelbrot_init(t_fractal *fractal, const char *name)
 {
@@ -75,7 +75,7 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 
 int	graphics_init(t_fractal *fractal)
 {
-	fractal->mlx = mlx_init(SIZE, SIZE, fractal->name, false);
+	fractal->mlx = mlx_init(SIZE, SIZE, fractal->name, FALSE);
 	if (!fractal->mlx)
 	{
 		ft_puts(mlx_strerror(mlx_errno));
