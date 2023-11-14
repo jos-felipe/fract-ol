@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 15:23:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:22:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ typedef struct s_channel
  * @param iter_max The maximum number of iterations
  * @param axis_len The length of the axis in z-plane
  * @param a The zoom factor
- * @param b The x-y coordinates in z-plane of canvas upper-left corner (0,0)
- * @param c The x-y coordinates in z-plane of the constant c in Julia set
- * @param ch The three color channels RGB
+ * @param b The z-plane point related to canvas upper-left corner (0,0)
+ * @param c The x-y coordinates in z-plane of the constant c for Julia sets
+ * @param rgb The three color channels
+ * @param x Combinat
  * @param j The Julia constant selector
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
@@ -67,7 +68,7 @@ typedef struct s_fractal
 	t_channel		ch;
 	int				rgb[3];
 	int				x;
-	int				j;
+	// int				j;
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
 }	t_fractal;
@@ -84,7 +85,6 @@ int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
 void		ft_joystick(void *param);
 void		ft_julia_c(t_fractal *fractal);
-// int32_t		ft_bernstein_poly(uint32_t i, t_fractal *fractal);
 int32_t		ft_bernstein_poly(double t, int *rgb);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);

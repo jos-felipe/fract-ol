@@ -6,6 +6,7 @@ LIBFT	:= ./lib/libft
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a -ldl -lglfw -pthread -lm
+
 SRCS	:=	./src/hooks.c	\
 			./src/inits.c	\
 			./src/main.c	\
@@ -20,8 +21,7 @@ SRCS_BONUS	:=	./src/hooks_bonus.c	\
 
 OBJS	:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
-DEPS	:= ./include/fractol.h
-DEPS_BONUS	:= ./include/fractol_bonus.h
+
 
 all: libmlx libft $(NAME)
 
@@ -33,10 +33,17 @@ libmlx:
 libft:
 	@make -C $(LIBFT)
 
-%.o: %.c $(DEPS)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+%.d: %.c
+	@$(CC) -MM $(CFLAGS) -o $@ $<
 
-$(NAME): $(OBJS)
+include $(SRCS:.c=.d)
+
+include $(SRCS_BONUS:.c=.d)
+
+%.o: %.c $(DEPS) $(DEPS_BONUS)
+	@$(CC) $(CFLAGS) -o $@ $(<:.d=.c)-c $< $(HEADERS)  && printf "Compiling: $(notdir $<)"
+
+$(NAME): $(OBJS) 
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(NAME_BONUS): $(OBJS_BONUS)
