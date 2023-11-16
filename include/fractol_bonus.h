@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 20:22:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:53:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_fractal
 	t_channel		ch;
 	int				rgb[3];
 	int				x;
-	// int				j;
+	int				j;
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
 }	t_fractal;

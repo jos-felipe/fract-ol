@@ -1,6 +1,6 @@
 NAME	:= fractol
 NAME_BONUS	:= fractol_bonus
-CFLAGS	:= -g3
+CFLAGS	:= -Wall -Wextra -Werror -Ofast
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 
@@ -28,20 +28,14 @@ all: libmlx libft $(NAME)
 bonus: libmlx libft $(NAME_BONUS)
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	@cmake $(LIBMLX) -B $(LIBMLX)/build
+	@make -sC $(LIBMLX)/build -j4
 
 libft:
-	@make -C $(LIBFT)
+	@make -sC $(LIBFT)
 
-%.d: %.c
-	@$(CC) -MM $(CFLAGS) -o $@ $<
-
-include $(SRCS:.c=.d)
-
-include $(SRCS_BONUS:.c=.d)
-
-%.o: %.c $(DEPS) $(DEPS_BONUS)
-	@$(CC) $(CFLAGS) -o $@ $(<:.d=.c)-c $< $(HEADERS)  && printf "Compiling: $(notdir $<)"
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)  && printf "Compiling: $(notdir $<) \n"
 
 $(NAME): $(OBJS) 
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
@@ -51,7 +45,6 @@ $(NAME_BONUS): $(OBJS_BONUS)
 
 clean:
 	@rm -rf $(OBJS) $(OBJS_BONUS)
-	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@rm -rf $(NAME) $(NAME_BONUS)

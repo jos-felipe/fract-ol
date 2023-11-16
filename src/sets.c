@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/12 17:17:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:21:08 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 {
-	double		xtemp;
-	t_complex	z;
-	uint32_t	color;
-	int32_t		i;
+	double			xtemp;
+	t_complex		z;
+	uint32_t		color;
+	unsigned int	i;
 
 	z.x = 0;
 	z.y = 0;
@@ -42,9 +42,9 @@ uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c)
 
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 {
-	double		xtemp;
-	uint32_t	color;
-	int32_t		i;
+	double			xtemp;
+	uint32_t		color;
+	unsigned int	i;
 
 	i = 0;
 	while (i < fractal->iter_max)
