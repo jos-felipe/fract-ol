@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 12:57:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:16:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	t_complex	cursor;
 	t_complex	d;
 
+	xdelta = 0;
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
 	ztrans(&cursor, fractal, &pixel);

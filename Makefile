@@ -1,5 +1,6 @@
 NAME	:= fractol
 NAME_BONUS	:= fractol_bonus
+
 CFLAGS	:= -Wall -Wextra -Werror -Ofast
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
@@ -19,7 +20,7 @@ SRCS_BONUS	:=	./src/hooks_bonus.c	\
 				./src/sets_bonus.c	\
 				./src/utils_bonus.c
 
-OBJS	:= ${SRCS:.c=.o}
+OBJS		:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
 
 
@@ -41,7 +42,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	@$(CC) $(OBJS_BONUS) $(LIBS) $(HEADERS) -o $(NAME_BONUS)
+	@$(CC) $(OBJS_BONUS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS) $(OBJS_BONUS)
@@ -51,4 +52,6 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx, libft, bonus
+reb: clean bonus
+
+.PHONY: all, clean, fclean, re, reb, libmlx, libft, bonus
