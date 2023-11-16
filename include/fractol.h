@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:06:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:30:44 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
+# define ITER_MAX 1000
 
 typedef struct s_pixel
 {

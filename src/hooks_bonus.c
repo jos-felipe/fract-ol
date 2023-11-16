@@ -6,11 +6,12 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:16:02 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:42:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol_bonus.h"
+#include <stdio.h>
 
 void	ft_zoom(double xdelta, double ydelta, void *param)
 {
@@ -38,6 +39,7 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 		fractal->b.y += d.y / 10;
 	}
 	fractal->a = fractal->axis_len / SIZE;
+	printf("zoom: %f\n", 1 / fractal->a);
 }
 
 void	ft_joystick(void *param)

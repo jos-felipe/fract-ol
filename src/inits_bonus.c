@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 19:10:44 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:29:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	mandelbrot_init(t_fractal *fractal, const char *name)
 {
 	fractal->name = name;
 	fractal->f = ft_mandelbrot;
-	fractal->iter_max = 100;
+	fractal->iter_max = ITER_MAX;
 	fractal->axis_len = 4.0;
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
@@ -32,7 +32,7 @@ int	julia_init(t_fractal *fractal, const char *name)
 {	
 	fractal->name = name;
 	fractal->f = ft_julia;
-	fractal->iter_max = 100;
+	fractal->iter_max = ITER_MAX;
 	fractal->axis_len = 4.0;
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
