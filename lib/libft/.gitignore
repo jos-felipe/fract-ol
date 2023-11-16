@@ -4,3 +4,4 @@
 libft.a
 *.pdf
 .DS_Store
+.vscode

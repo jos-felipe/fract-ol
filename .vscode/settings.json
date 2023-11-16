@@ -1,0 +1,8 @@
+{
+	"cmake.configureOnOpen": false,
+	"files.associations": {
+		"typeinfo": "c",
+		"mlx42.h": "c",
+		"fractol_bonus.h": "c"
+	}
+}
