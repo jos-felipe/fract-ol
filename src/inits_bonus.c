@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:29:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:39:38 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ int	julia_init(t_fractal *fractal, const char *name)
 	return (EXIT_SUCCESS);
 }
 
+int	sierpinsky_init(t_fractal *fractal, const char *name)
+{	
+	fractal->name = name;
+	fractal->iter_max = 9;
+	fractal->axis_len = SIZE;
+	fractal->a = fractal->axis_len / SIZE;
+	fractal->b.x = 0.0;
+	fractal->b.y = 0.0;
+	
+	fractal->pinsky.a.x = SIZE / 2;
+    fractal->pinsky.a.y = 25;
+
+    fractal->pinsky.b.x = 25;
+    fractal->pinsky.b.y = SIZE - 25;
+
+    fractal->pinsky.c.x = SIZE - 25;
+    fractal->pinsky.c.y = SIZE - 25;
+	return (EXIT_SUCCESS);
+}
+
 int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 {
 	int	status;
@@ -61,8 +81,8 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 			if (argc > 2)
 				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
 		}	
-		else if (!ft_strncmp(argv[1], "burningship", 11))
-			status = EXIT_SUCCESS;
+		else if (!ft_strncmp(argv[1], "Sierpinsky", 10))
+			status = sierpinsky_init(fractal, argv[1]);
 	}
 	return (status);
 }

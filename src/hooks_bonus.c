@@ -6,12 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:42:31 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 16:40:55 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol_bonus.h"
-#include <stdio.h>
 
 void	ft_zoom(double xdelta, double ydelta, void *param)
 {
@@ -23,9 +22,12 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	xdelta = 0;
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
-	ztrans(&cursor, fractal, &pixel);
+	if (!ft_strncmp(fractal->name, "Sierpinsky", 10))
+		ft_skytrans(&cursor, fractal, pixel);
+	else
+		ztrans(&cursor, fractal, &pixel);
 	d.x = cursor.x - fractal->b.x;
-	d.y = fractal->b.y - cursor.y;
+	d.y = fractal->b.y - cursor.y;	
 	if (ydelta > 0)
 	{
 		fractal->axis_len *= 0.9;
@@ -39,7 +41,6 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 		fractal->b.y += d.y / 10;
 	}
 	fractal->a = fractal->axis_len / SIZE;
-	printf("zoom: %f\n", 1 / fractal->a);
 }
 
 void	ft_joystick(void *param)

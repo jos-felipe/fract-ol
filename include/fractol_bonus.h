@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:53:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 17:35:06 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,25 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_channel
 {
 	uint32_t	r;
 	uint32_t	g;
 	uint32_t	b;
 }	t_channel;
+
+typedef struct s_sierpinsky
+{
+	t_point	a;
+	t_point	b;
+	t_point	c;
+}	t_sierpinsky;
 
 /**
  * @brief A structure to store the characteristics of the fractal
@@ -56,7 +69,9 @@ typedef struct s_channel
  * @param j The Julia constant selector
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
+ * @param pinsky A Sierpinsky object 
  */
+
 typedef struct s_fractal
 {
 	const char		*name;
@@ -72,12 +87,15 @@ typedef struct s_fractal
 	int				j;
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	t_sierpinsky	pinsky;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
+void		ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal);
 int			mandelbrot_init(t_fractal *fractal, const char *name);
 int			julia_init(t_fractal *fractal, const char *name);
+int			sierpinsky_init(t_fractal *fractal, const char *name);
 void		julia_sets(t_complex *c, int i);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal);
@@ -91,5 +109,11 @@ void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
 void		ft_puts(const char *str);
 void		ft_croupier(t_fractal *fr);
+void		ft_bresenham(t_point a, t_point b, t_fractal *fractal);
+t_point		ft_middle(t_point a, t_point b);
+void		ft_classic_artist(void *param);
+t_point		ft_strans(t_point p, t_fractal *fr);
+void		ft_skytrans(t_complex *p, t_fractal *fr, t_pixel px);
+void		ft_rev_strans(t_point *p2, t_point p1, t_fractal *fr);
 
 #endif

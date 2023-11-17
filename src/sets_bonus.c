@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:17:16 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 17:23:09 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	else
 		color = ft_bernstein_poly(1.0 * i / fractal->iter_max, fractal->rgb);
 	return (color);
+}
+
+void	ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal)
+{
+	if(n > 0)
+	{
+		ft_bresenham(a, b, fractal);
+		ft_bresenham(b, c, fractal);
+		ft_bresenham(c, a, fractal);
+		ft_sierpinsky(a, ft_middle(a, b), ft_middle(a, c), n-1, fractal);
+		ft_sierpinsky(ft_middle(a, b), b, ft_middle(b, c), n-1, fractal);
+		ft_sierpinsky(ft_middle(a, c), ft_middle(b, c), c, n-1, fractal);
+	}
+	return ;
 }
 
 void	julia_sets(t_complex *c, int i)

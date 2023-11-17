@@ -18,7 +18,8 @@ SRCS_BONUS	:=	./src/hooks_bonus.c	\
 				./src/inits_bonus.c	\
 				./src/main_bonus.c	\
 				./src/sets_bonus.c	\
-				./src/utils_bonus.c
+				./src/utils_bonus.c	\
+				./src/sierpinsky_bonus.c
 
 OBJS		:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}

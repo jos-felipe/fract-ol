@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 12:57:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:40:09 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ int	main(int argc, const char *argv[])
 		ft_puts("Please enter one of the lines below:");
 		ft_puts("./fractol Mandelbrot");
 		ft_puts("./fractol Julia {1..4}");
+		ft_puts("./fractol Sierpinsky");
 		return (EXIT_FAILURE);
 	}
 	if (graphics_init(&fr))
 		return (EXIT_FAILURE);
-	mlx_loop_hook(fr.mlx, ft_artist, &fr);
+	if (!ft_strncmp(argv[1], "Sierpinsky", 10))
+		mlx_loop_hook(fr.mlx, ft_classic_artist, &fr);
+	else
+		mlx_loop_hook(fr.mlx, ft_artist, &fr);
 	mlx_loop_hook(fr.mlx, ft_joystick, &fr);
 	mlx_scroll_hook(fr.mlx, ft_zoom, &fr);
 	mlx_loop(fr.mlx);
