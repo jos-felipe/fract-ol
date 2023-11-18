@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 14:39:38 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:04:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,8 @@ int	sierpinsky_init(t_fractal *fractal, const char *name)
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0;
 	fractal->b.y = 0.0;
-	
-	fractal->pinsky.a.x = SIZE / 2;
-    fractal->pinsky.a.y = 25;
-
-    fractal->pinsky.b.x = 25;
-    fractal->pinsky.b.y = SIZE - 25;
-
-    fractal->pinsky.c.x = SIZE - 25;
-    fractal->pinsky.c.y = SIZE - 25;
+	ft_abc(fractal);
+	fractal->dx = 0;
 	return (EXIT_SUCCESS);
 }
 

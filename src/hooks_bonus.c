@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 16:40:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:05:46 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,15 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	xdelta = 0;
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
-	if (!ft_strncmp(fractal->name, "Sierpinsky", 10))
-		ft_skytrans(&cursor, fractal, pixel);
-	else
-		ztrans(&cursor, fractal, &pixel);
+	ztrans(&cursor, fractal, &pixel);
 	d.x = cursor.x - fractal->b.x;
-	d.y = fractal->b.y - cursor.y;	
+	d.y = fractal->b.y - cursor.y;
 	if (ydelta > 0)
 	{
 		fractal->axis_len *= 0.9;
 		fractal->b.x += d.x / 10;
 		fractal->b.y -= d.y / 10;
+		fractal->dx++;
 	}
 	else if (ydelta < 0)
 	{
