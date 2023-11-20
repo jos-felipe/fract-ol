@@ -4,3 +4,5 @@
 .vscode
 *.d
 fractol
+.DS_Store
+```

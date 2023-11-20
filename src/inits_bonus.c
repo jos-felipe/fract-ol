@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 21:04:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:19:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,9 @@ int	julia_init(t_fractal *fractal, const char *name)
 int	sierpinsky_init(t_fractal *fractal, const char *name)
 {	
 	fractal->name = name;
-	fractal->iter_max = 9;
-	fractal->axis_len = SIZE;
-	fractal->a = fractal->axis_len / SIZE;
-	fractal->b.x = 0.0;
-	fractal->b.y = 0.0;
+	fractal->iter_max = 1;
+	fractal->z = 1;
 	ft_abc(fractal);
-	fractal->dx = 0;
 	return (EXIT_SUCCESS);
 }
 

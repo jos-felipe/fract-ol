@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 21:04:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:14:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
-# define ITER_MAX 2500
+# define ITER_MAX 100
 # define MARGIN 0.03
 
 typedef struct s_pixel
@@ -89,7 +89,7 @@ typedef struct s_fractal
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
 	t_sierpinsky	pinsky;
-	int				dx;
+	double			z;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
@@ -118,6 +118,5 @@ t_point		ft_strans(t_point p, t_fractal *fr);
 void		ft_skytrans(t_complex *p, t_fractal *fr, t_pixel px);
 void		ft_rev_strans(t_point *p2, t_point p1, t_fractal *fr);
 void		ft_abc(t_fractal *fr);
-void		ft_2pixel(t_point *a, t_point *b, t_fractal *fr);
 
 #endif

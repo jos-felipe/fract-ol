@@ -3,28 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sierpinsky_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:45:17 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 21:04:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:41:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol_bonus.h"
 
-void	ft_skytrans(t_complex *p, t_fractal *fr, t_pixel px)
-{
-	p->x = (+1.0) * fr->a * px.w + fr->b.x;
-	p->y = (+1.0) * fr->a * px.h + fr->b.y;
-}
-
-void	ft_2pixel(t_point *a, t_point *b, t_fractal *fr)
-{
-	a->x -= fr->dx; 
-	b->x += fr->dx;
-	a->y -= fr->dx;
-	b->y += fr->dx;
-}
 void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
 {
 	uint32_t color = ft_pixel(255, 255, 255, 255);
@@ -34,8 +21,6 @@ void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
     int32_t    dx;
     int32_t    dy;
     int32_t i = 0;
-
-	ft_2pixel(&a, &b, fractal);
 
     dx = b.x - a.x;
     dy = b.y - a.y;
@@ -99,34 +84,6 @@ t_point ft_middle(t_point a, t_point b)
     return (c);
 }
 
-t_point	ft_strans(t_point p, t_fractal *fr)
-{
-	t_point	res;
-	
-	res.x = fr->a * p.x + fr->b.x;
-	res.y = fr->a * p.y + fr->b.y;
-	return (res);
-}
-
-void	ft_strans_(t_point *p1, t_point *p2, t_fractal *fr)
-{
-	int	dx;
-	int	dy;
-
-	dx = fr->a * (p2->x - p1->x);
-	dy = fr->a * (p2->y - p1->y);
-	p1->x -= dx / 2;
-	p1->y -= dy / 2;
-	p2->x += dx / 2;
-	p2->y += dy / 2;
-}
-
-void	ft_rev_strans(t_point *p2, t_point p1, t_fractal *fr)
-{
-	p2->x = (1 / fr->a) * p1.x - fr->b.x;
-	p2->y = (1 / fr->a) * p1.y - fr->b.y;
-}
-
 void	ft_classic_artist(void *param)
 {
 	t_fractal	*fr;
@@ -139,10 +96,20 @@ void	ft_classic_artist(void *param)
 
 void	ft_abc(t_fractal *fr)
 {
-	fr->pinsky.a.x = fr->axis_len / 2;
-    fr->pinsky.a.y = MARGIN * fr->axis_len;
-    fr->pinsky.b.x = MARGIN * fr->axis_len;
-    fr->pinsky.b.y = fr->axis_len - MARGIN * fr->axis_len;
-    fr->pinsky.c.x = fr->axis_len - MARGIN * fr->axis_len;
-    fr->pinsky.c.y = fr->axis_len - MARGIN * fr->axis_len;
+    fr->pinsky.b.x = MARGIN * SIZE;
+    fr->pinsky.b.y = SIZE - MARGIN * SIZE;
+	fr->pinsky.a.x = SIZE / 2;
+    fr->pinsky.a.y = MARGIN * SIZE;
+    fr->pinsky.c.x = SIZE - MARGIN * SIZE;
+    fr->pinsky.c.y = SIZE - MARGIN * SIZE;
+}
+
+void	ft_abc_zoom(t_fractal *fr)
+{
+    fr->pinsky.b.x = MARGIN * SIZE;
+    fr->pinsky.b.y = SIZE - MARGIN * SIZE;
+	fr->pinsky.a.x = (fr->pinsky.a.x - fr->pinsky.b.x);
+    fr->pinsky.a.y = MARGIN * SIZE;
+    fr->pinsky.c.x = SIZE - MARGIN * SIZE;
+    fr->pinsky.c.y = SIZE - MARGIN * SIZE;
 }

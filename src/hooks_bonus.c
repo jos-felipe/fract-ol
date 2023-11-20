@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 21:05:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:05:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol_bonus.h"
+#include <string.h>
 
 void	ft_zoom(double xdelta, double ydelta, void *param)
 {
@@ -19,9 +20,15 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	t_complex	cursor;
 	t_complex	d;
 
-	xdelta = 0;
+	// xdelta = 0;
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
+	if (!strcmp(fractal->name, "Sierpinsky"))
+	{
+		fractal->z += 0.1;
+		ft_abc(fractal);
+		return ;
+	}
 	ztrans(&cursor, fractal, &pixel);
 	d.x = cursor.x - fractal->b.x;
 	d.y = fractal->b.y - cursor.y;
@@ -30,7 +37,6 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 		fractal->axis_len *= 0.9;
 		fractal->b.x += d.x / 10;
 		fractal->b.y -= d.y / 10;
-		fractal->dx++;
 	}
 	else if (ydelta < 0)
 	{
