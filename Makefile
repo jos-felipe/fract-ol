@@ -1,7 +1,7 @@
 NAME		:= fractol
 NAME_BONUS	:= fractol_bonus
 
-CFLAGS	:= -g3
+CFLAGS	:= -Ofast
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
