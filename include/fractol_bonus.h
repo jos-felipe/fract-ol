@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 11:04:34 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:09:22 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_fractal
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
-void		ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal);
+void		ft_sierpinsky(t_point abc[], int n, t_fractal *fr);
 int			mandelbrot_init(t_fractal *fractal, const char *name);
 int			julia_init(t_fractal *fractal, const char *name);
 int			sierpinsky_init(t_fractal *fractal, const char *name);
@@ -118,6 +118,6 @@ void		ft_abc(t_fractal *fr);
 void		ft_abc_zoom(double xdelta, double ydelta, void *param);
 int			ft_pt_validation(t_point a);
 int			ft_strcmp(const char *s1, const char *s2);
-
+void		ft_draw_triangle(t_fractal *fr, t_point a, t_point b, t_point c);
 
 #endif

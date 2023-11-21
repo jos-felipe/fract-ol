@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 17:23:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:16:36 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,43 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	return (color);
 }
 
-void	ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal)
+// void	ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal)
+// {
+// 	if(n > 0)
+// 	{
+// 		ft_bresenham(a, b, fractal);
+// 		ft_bresenham(b, c, fractal);
+// 		ft_bresenham(c, a, fractal);
+// 		ft_sierpinsky(a, ft_middle(a, b), ft_middle(a, c), n-1, fractal);
+// 		ft_sierpinsky(ft_middle(a, b), b, ft_middle(b, c), n-1, fractal);
+// 		ft_sierpinsky(ft_middle(a, c), ft_middle(b, c), c, n-1, fractal);
+// 	}
+// 	return ;
+// }
+
+void	ft_sierpinsky(t_point abc[], int n, t_fractal *fr)
 {
-	if(n > 0)
+	t_point	tmp[3];
+
+	tmp[0] = abc[0];
+	tmp[1] = abc[1];
+	tmp[2] = abc[2];
+	if (n > 0)
 	{
-		ft_bresenham(a, b, fractal);
-		ft_bresenham(b, c, fractal);
-		ft_bresenham(c, a, fractal);
-		ft_sierpinsky(a, ft_middle(a, b), ft_middle(a, c), n-1, fractal);
-		ft_sierpinsky(ft_middle(a, b), b, ft_middle(b, c), n-1, fractal);
-		ft_sierpinsky(ft_middle(a, c), ft_middle(b, c), c, n-1, fractal);
+		ft_draw_triangle(fr, tmp[0], tmp[1], tmp[2]);
+		abc[0] = tmp[0];
+		abc[1] = ft_middle(tmp[0], tmp[1]);
+		abc[2] = ft_middle(tmp[0], tmp[2]);
+		ft_sierpinsky(abc, n - 1, fr);
+		abc[0] = ft_middle(tmp[0], tmp[1]);
+		abc[1] = tmp[1];
+		abc[2] = ft_middle(tmp[1], tmp[2]);
+		ft_sierpinsky(abc, n - 1, fr);
+		abc[0] = ft_middle(tmp[0], tmp[2]);
+		abc[1] = ft_middle(tmp[1], tmp[2]);
+		abc[2] = tmp[2];
+		ft_sierpinsky(abc, n - 1, fr);
 	}
-	return ;
 }
 
 void	julia_sets(t_complex *c, int i)
