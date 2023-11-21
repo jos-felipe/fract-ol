@@ -1,12 +1,11 @@
-NAME	:= fractol
+NAME		:= fractol
 NAME_BONUS	:= fractol_bonus
 
 CFLAGS	:= -g3
 LIBMLX	:= ./lib/MLX42
-LIBFT	:= ./lib/libft
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a -ldl -lglfw -pthread -lm
+HEADERS	:= -I ./include -I $(LIBMLX)/include
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRCS	:=	./src/hooks.c	\
 			./src/inits.c	\
@@ -26,19 +25,17 @@ OBJS		:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
 
 
-all: libmlx libft $(NAME)
+all: libmlx $(NAME)
 
-bonus: libmlx libft $(NAME_BONUS)
+bonus: libmlx $(NAME_BONUS)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build
 	@make -sC $(LIBMLX)/build -j4
 
-libft:
-	@make -sC $(LIBFT)
-
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)  && printf "Compiling: $(notdir $<) \n"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@printf "Compiling: $(notdir $<) \n"
 
 $(NAME): $(OBJS) 
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
@@ -56,4 +53,4 @@ re: clean all
 
 reb: clean bonus
 
-.PHONY: all, clean, fclean, re, reb, libmlx, libft, bonus
+.PHONY: all, clean, fclean, re, reb, libmlx, bonus

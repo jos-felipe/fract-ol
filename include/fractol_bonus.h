@@ -6,21 +6,23 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 13:15:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:08:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_BONUS_H
 # define FRACTOL_BONUS_H
 
+# include <unistd.h>
+# include <stdlib.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "../lib/libft/libft.h"
+// # include "../lib/libft/libft.h"
 
 # define TRUE 1
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
-# define ITER_MAX 1000
+# define ITER_MAX 100
 # define MARGIN 0.03
 
 typedef struct s_pixel
