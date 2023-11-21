@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 13:12:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:28:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol_bonus.h"
+#include "../../include/fractol_bonus.h"
 
 int	mandelbrot_init(t_fractal *fractal, const char *name)
 {

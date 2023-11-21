@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/14 12:57:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:48:16 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,11 @@
 * @param fractal The fractal instance
 * @param pixel The current pixel
 */
-void	ztrans( t_complex *z, t_fractal *fractal, t_pixel *pixel)
+void	ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel)
 {
 	z->x = (+1.0) * fractal->a * pixel->w + fractal->b.x;
 	z->y = (-1.0) * fractal->a * pixel->h + fractal->b.y;
 }
-
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-/* int32_t	ft_bernstein_poly(uint32_t i, t_fractal *fractal)
-{
-	double		t;
-	int32_t		poly[3];
-	t_channel	*ch;
-
-	t = 1.0 * i / fractal->iter_max;
-	ch = &fractal->ch;
-	poly[0] = 255 * 15 * (1 - t) * (1 - t) * t * t;
-	poly[1] = 255 * 9 * (1 - t) * t * t * t;
-	poly[2] = 255 * 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
-	return (ft_pixel(poly[ch->r], poly[ch->g], poly[ch->b], 255));
-} */
 
 int32_t	ft_bernstein_poly(double t, int *rgb)
 {
@@ -75,12 +56,10 @@ void	ft_croupier(t_fractal *fr)
 {
 	int	tmp;
 
-     	fr->x++;
+	fr->x++;
 	if (fr->x > 1)
 		fr->x = 0;
 	tmp = fr->rgb[fr->x];
 	fr->rgb[fr->x] = fr->rgb[fr->x + 1];
 	fr->rgb[fr->x + 1] = tmp;
 }
-
-

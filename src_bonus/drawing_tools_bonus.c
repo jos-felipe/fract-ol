@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:48:30 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 19:38:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:46:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,9 @@ void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
 		ft_bresenham_h(a, dx, dy, fractal);
 	else
 		ft_bresenham_v(a, dx, dy, fractal);
+}
+
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

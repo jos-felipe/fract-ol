@@ -8,3 +8,5 @@ fractol
 ```
 .vscode/tasks.json
 .vscode/launch.json
+_src/
+include/_fractol.h

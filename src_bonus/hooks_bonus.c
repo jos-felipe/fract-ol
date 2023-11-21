@@ -6,12 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 13:03:51 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:28:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol_bonus.h"
-#include <string.h>
+#include "../../include/fractol_bonus.h"
 
 void	ft_zoom(double xdelta, double ydelta, void *param)
 {
@@ -20,7 +19,7 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	t_complex	cursor;
 	t_complex	d;
 
-	// xdelta = 0;
+	xdelta = 0;
 	fractal = param;
 	mlx_get_mouse_pos(fractal->mlx, &pixel.w, &pixel.h);
 	ztrans(&cursor, fractal, &pixel);
@@ -41,38 +40,39 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	fractal->a = fractal->axis_len / SIZE;
 }
 
+void	ft_scroll_in(t_fractal *fr, int32_t width, int32_t height)
+{
+	fr->pinsky.a.x -= (width - fr->pinsky.a.x) / 10;
+	fr->pinsky.a.y -= (height - fr->pinsky.a.y) / 10;
+	fr->pinsky.b.x -= (width - fr->pinsky.b.x) / 10;
+	fr->pinsky.b.y -= (height - fr->pinsky.b.y) / 10;
+	fr->pinsky.c.x -= (width - fr->pinsky.c.x) / 10;
+	fr->pinsky.c.y -= (height - fr->pinsky.c.y) / 10;
+}
+
+void	ft_scroll_out(t_fractal *fr, int32_t width, int32_t height)
+{
+	fr->pinsky.a.x += (width - fr->pinsky.a.x) / 10;
+	fr->pinsky.a.y += (height - fr->pinsky.a.y) / 10;
+	fr->pinsky.b.x += (width - fr->pinsky.b.x) / 10;
+	fr->pinsky.b.y += (height - fr->pinsky.b.y) / 10;
+	fr->pinsky.c.x += (width - fr->pinsky.c.x) / 10;
+	fr->pinsky.c.y += (height - fr->pinsky.c.y) / 10;
+}
+
 void	ft_abc_zoom(double xdelta, double ydelta, void *param)
 {
 	t_fractal	*fr;
-	t_pixel		pixel;
-	// t_point		d;
+	int32_t		width;
+	int32_t		height;
 
+	xdelta = 0;
 	fr = param;
-	mlx_get_mouse_pos(fr->mlx, &pixel.w, &pixel.h);
+	mlx_get_mouse_pos(fr->mlx, &width, &height);
 	if (ydelta > 0)
-	{
-		// if (fr->z < 1)
-		// 	fr->z = 1;
-		// fr->z *= 1.1;
-		fr->pinsky.a.x -= (pixel.w - fr->pinsky.a.x) / 10;
-		fr->pinsky.a.y -= (pixel.h - fr->pinsky.a.y) / 10;
-		fr->pinsky.b.x -= (pixel.w - fr->pinsky.b.x) / 10;
-		fr->pinsky.b.y -= (pixel.h - fr->pinsky.b.y) / 10;
-		fr->pinsky.c.x -= (pixel.w - fr->pinsky.c.x) / 10;
-		fr->pinsky.c.y -= (pixel.h - fr->pinsky.c.y) / 10;
-	}
+		ft_scroll_in(fr, width, height);
 	else if (ydelta < 0)
-	{
-		// if (fr->z > 1)
-		// 	fr->z = 1;
-		// fr->z *= 0.9;
-		fr->pinsky.a.x += (pixel.w - fr->pinsky.a.x) / 10;
-		fr->pinsky.a.y += (pixel.h - fr->pinsky.a.y) / 10;
-		fr->pinsky.b.x += (pixel.w - fr->pinsky.b.x) / 10;
-		fr->pinsky.b.y += (pixel.h - fr->pinsky.b.y) / 10;
-		fr->pinsky.c.x += (pixel.w - fr->pinsky.c.x) / 10;
-		fr->pinsky.c.y += (pixel.h - fr->pinsky.c.y) / 10;
-	}
+		ft_scroll_out(fr, width, height);
 	mlx_delete_image(fr->mlx, fr->canvas);
 	fr->canvas = mlx_new_image(fr->mlx, SIZE, SIZE);
 	mlx_image_to_window(fr->mlx, fr->canvas, 0, 0);
@@ -104,11 +104,3 @@ void	ft_joystick(void *param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
 		fractal->b.x += fractal->a * STEP;
 }
-
-// void	ft_julia_c(t_fractal *fractal)
-// {
-// 	fractal->j++;
-// 	if (fractal->j == 4)
-// 		fractal->j = 0;
-// 	julia_sets(&fractal->c, fractal->j);
-// }
