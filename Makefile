@@ -1,7 +1,7 @@
 NAME	:= fractol
 NAME_BONUS	:= fractol_bonus
 
-CFLAGS	:= 
+CFLAGS	:= -g3
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 

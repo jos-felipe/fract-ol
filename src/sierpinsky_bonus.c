@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sierpinsky_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:45:17 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/20 13:41:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:55:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol_bonus.h"
+#include <stdio.h>
 
 void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
 {
@@ -45,7 +46,11 @@ void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
                 dis = dis + 2*(abs(dy) - abs(dx));
             }
             i++;
-			mlx_put_pixel(fractal->canvas, a.x, a.y, color);
+			if (!ft_pt_validation(a))
+			{
+				printf("x=%d, y=%d\n", a.x, a.y);
+            	mlx_put_pixel(fractal->canvas, a.x, a.y, color);
+			}
         }
     }
     else
@@ -68,9 +73,12 @@ void	ft_bresenham(t_point a, t_point b, t_fractal *fractal)
                 dis = dis + 2*(abs(dx) - abs(dy));
             }
             i++;
-            mlx_put_pixel(fractal->canvas, a.x, a.y, color);
+			if (!ft_pt_validation(a))
+			{
+				printf("x=%d, y=%d\n", a.x, a.y);
+            	mlx_put_pixel(fractal->canvas, a.x, a.y, color);
+			}
         }
-        
     }
 }
 
@@ -104,12 +112,7 @@ void	ft_abc(t_fractal *fr)
     fr->pinsky.c.y = SIZE - MARGIN * SIZE;
 }
 
-void	ft_abc_zoom(t_fractal *fr)
+int	ft_pt_validation(t_point a)
 {
-    fr->pinsky.b.x = MARGIN * SIZE;
-    fr->pinsky.b.y = SIZE - MARGIN * SIZE;
-	fr->pinsky.a.x = (fr->pinsky.a.x - fr->pinsky.b.x);
-    fr->pinsky.a.y = MARGIN * SIZE;
-    fr->pinsky.c.x = SIZE - MARGIN * SIZE;
-    fr->pinsky.c.y = SIZE - MARGIN * SIZE;
+	return (a.x < MARGIN * SIZE || a.x > SIZE - MARGIN * SIZE || a.y < MARGIN * SIZE || a.y > SIZE - MARGIN * SIZE);
 }

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/17 14:40:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:05:11 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ int	main(int argc, const char *argv[])
 	if (graphics_init(&fr))
 		return (EXIT_FAILURE);
 	if (!ft_strncmp(argv[1], "Sierpinsky", 10))
+	{
 		mlx_loop_hook(fr.mlx, ft_classic_artist, &fr);
+		mlx_scroll_hook(fr.mlx, ft_abc_zoom, &fr);
+		mlx_loop_hook(fr.mlx, ft_joystick, &fr);
+	}
 	else
+	{
 		mlx_loop_hook(fr.mlx, ft_artist, &fr);
-	mlx_loop_hook(fr.mlx, ft_joystick, &fr);
-	mlx_scroll_hook(fr.mlx, ft_zoom, &fr);
+		mlx_loop_hook(fr.mlx, ft_joystick, &fr);
+		mlx_scroll_hook(fr.mlx, ft_zoom, &fr);
+	}
 	mlx_loop(fr.mlx);
 	mlx_terminate(fr.mlx);
 	return (EXIT_SUCCESS);

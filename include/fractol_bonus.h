@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/20 13:14:51 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:09:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
-# define ITER_MAX 100
+# define ITER_MAX 1000
 # define MARGIN 0.03
 
 typedef struct s_pixel
@@ -114,9 +114,8 @@ void		ft_croupier(t_fractal *fr);
 void		ft_bresenham(t_point a, t_point b, t_fractal *fractal);
 t_point		ft_middle(t_point a, t_point b);
 void		ft_classic_artist(void *param);
-t_point		ft_strans(t_point p, t_fractal *fr);
-void		ft_skytrans(t_complex *p, t_fractal *fr, t_pixel px);
-void		ft_rev_strans(t_point *p2, t_point p1, t_fractal *fr);
 void		ft_abc(t_fractal *fr);
+void		ft_abc_zoom(double xdelta, double ydelta, void *param);
+int			ft_pt_validation(t_point a);
 
 #endif
