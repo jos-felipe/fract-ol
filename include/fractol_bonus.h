@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 12:09:22 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:15:00 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,12 @@ void		ft_sierpinsky(t_point abc[], int n, t_fractal *fr);
 int			mandelbrot_init(t_fractal *fractal, const char *name);
 int			julia_init(t_fractal *fractal, const char *name);
 int			sierpinsky_init(t_fractal *fractal, const char *name);
-void		julia_sets(t_complex *c, int i);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal);
 void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
 void		ft_joystick(void *param);
-void		ft_julia_c(t_fractal *fractal);
 int32_t		ft_bernstein_poly(double t, int *rgb);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
@@ -119,5 +117,6 @@ void		ft_abc_zoom(double xdelta, double ydelta, void *param);
 int			ft_pt_validation(t_point a);
 int			ft_strcmp(const char *s1, const char *s2);
 void		ft_draw_triangle(t_fractal *fr, t_point a, t_point b, t_point c);
+t_complex	ft_julia_set_c(char i);
 
 #endif

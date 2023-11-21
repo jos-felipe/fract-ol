@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 12:16:36 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:12:36 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,6 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	return (color);
 }
 
-// void	ft_sierpinsky(t_point a, t_point b, t_point c, int n, t_fractal *fractal)
-// {
-// 	if(n > 0)
-// 	{
-// 		ft_bresenham(a, b, fractal);
-// 		ft_bresenham(b, c, fractal);
-// 		ft_bresenham(c, a, fractal);
-// 		ft_sierpinsky(a, ft_middle(a, b), ft_middle(a, c), n-1, fractal);
-// 		ft_sierpinsky(ft_middle(a, b), b, ft_middle(b, c), n-1, fractal);
-// 		ft_sierpinsky(ft_middle(a, c), ft_middle(b, c), c, n-1, fractal);
-// 	}
-// 	return ;
-// }
-
 void	ft_sierpinsky(t_point abc[], int n, t_fractal *fr)
 {
 	t_point	tmp[3];
@@ -102,16 +88,24 @@ void	ft_sierpinsky(t_point abc[], int n, t_fractal *fr)
 	}
 }
 
-void	julia_sets(t_complex *c, int i)
+t_complex	ft_julia_set_c(char i)
 {
-	t_complex	tmp[4];
+	t_complex	tmp[5];
+	t_complex	c;
 
 	ft_complex(&tmp[0], -0.7, 0.27015);
 	ft_complex(&tmp[1], 0.285, 0.01);
 	ft_complex(&tmp[2], -0.8, 0.156);
 	ft_complex(&tmp[3], 0.4, 0.4);
-	if (i < 0 || i > 3)
-		return ;
-	c->x = tmp[i].x;
-	c->y = tmp[i].y;
+	ft_complex(&tmp[4], -0.4, 0.6);
+	c = tmp[4];
+	if (i == 'a')
+		c = tmp[0];
+	if (i == 'b')
+		c = tmp[1];
+	else if (i == 'c')
+		c = tmp[2];
+	else if (i == 'd')
+		c = tmp[3];
+	return (c);
 }

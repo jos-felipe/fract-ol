@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 12:19:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:12:56 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	julia_init(t_fractal *fractal, const char *name)
 	fractal->rgb[1] = 1;
 	fractal->rgb[2] = 2;
 	fractal->x = 0;
-	fractal->j = 0;
-	julia_sets(&fractal->c, fractal->j);
+	fractal->c = ft_julia_set_c('0');
 	return (EXIT_SUCCESS);
 }
 
@@ -69,7 +68,7 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 		{
 			status = julia_init(fractal, argv[1]);
 			if (argc > 2)
-				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
+				fractal->c = ft_julia_set_c(argv[2][0]);
 		}	
 		else if (!ft_strcmp(argv[1], "Sierpinsky"))
 			status = sierpinsky_init(fractal, argv[1]);

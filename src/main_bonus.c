@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 12:22:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:31:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, const char *argv[])
 	if (ft_args(&fr, argc, argv))
 	{
 		ft_puts("Please enter one of the lines below:");
-		ft_puts("./fractol Mandelbrot OR Julia {1..4} OR Sierpinsky");
+		ft_puts("./fractol Mandelbrot OR Julia {a..d} OR Sierpinsky");
 		return (EXIT_FAILURE);
 	}
 	if (graphics_init(&fr))
