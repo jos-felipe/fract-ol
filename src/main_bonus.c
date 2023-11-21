@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/20 18:05:11 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:06:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ void	ft_puts(const char *str)
 	while (*str)
 		write(1, str++, 1);
 	write(1, "\n", 1);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 void	ft_artist(void *param)
@@ -55,7 +65,7 @@ int	main(int argc, const char *argv[])
 	}
 	if (graphics_init(&fr))
 		return (EXIT_FAILURE);
-	if (!ft_strncmp(argv[1], "Sierpinsky", 10))
+	if (!ft_strcmp(argv[1], "Sierpinsky"))
 	{
 		mlx_loop_hook(fr.mlx, ft_classic_artist, &fr);
 		mlx_scroll_hook(fr.mlx, ft_abc_zoom, &fr);

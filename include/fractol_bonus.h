@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/20 18:09:15 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:04:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ void		ft_classic_artist(void *param);
 void		ft_abc(t_fractal *fr);
 void		ft_abc_zoom(double xdelta, double ydelta, void *param);
 int			ft_pt_validation(t_point a);
+int			ft_strcmp(const char *s1, const char *s2);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/20 18:25:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:07:17 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 	status = EXIT_FAILURE;
 	if (argc > 1)
 	{
-		if (!ft_strncmp(argv[1], "Mandelbrot", 10))
+		if (!ft_strcmp(argv[1], "Mandelbrot"))
 			status = mandelbrot_init(fractal, argv[1]);
-		else if (!ft_strncmp(argv[1], "Julia", 5))
+		else if (!ft_strcmp(argv[1], "Julia"))
 		{
 			status = julia_init(fractal, argv[1]);
 			if (argc > 2)
 				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
 		}	
-		else if (!ft_strncmp(argv[1], "Sierpinsky", 10))
+		else if (!ft_strcmp(argv[1], "Sierpinsky"))
 			status = sierpinsky_init(fractal, argv[1]);
 	}
 	return (status);
