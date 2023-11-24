@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 10:58:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:58:54 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_scroll_in(t_fractal *fr, int32_t width, int32_t height)
 	fr->pinsky.b.y -= (height - fr->pinsky.b.y) / 10;
 	fr->pinsky.c.x -= (width - fr->pinsky.c.x) / 10;
 	fr->pinsky.c.y -= (height - fr->pinsky.c.y) / 10;
+	ft_mlx_update(fr);
 }
 
 void	ft_scroll_out(t_fractal *fr, int32_t width, int32_t height)
@@ -58,6 +59,7 @@ void	ft_scroll_out(t_fractal *fr, int32_t width, int32_t height)
 	fr->pinsky.b.y += (height - fr->pinsky.b.y) / 10;
 	fr->pinsky.c.x += (width - fr->pinsky.c.x) / 10;
 	fr->pinsky.c.y += (height - fr->pinsky.c.y) / 10;
+	ft_mlx_update(fr);
 }
 
 void	ft_abc_zoom(double xdelta, double ydelta, void *param)
@@ -73,9 +75,6 @@ void	ft_abc_zoom(double xdelta, double ydelta, void *param)
 		ft_scroll_in(fr, width, height);
 	else if (ydelta < 0)
 		ft_scroll_out(fr, width, height);
-	mlx_delete_image(fr->mlx, fr->canvas);
-	fr->canvas = mlx_new_image(fr->mlx, SIZE, SIZE);
-	mlx_image_to_window(fr->mlx, fr->canvas, 0, 0);
 }
 
 void	ft_joystick(void *param)

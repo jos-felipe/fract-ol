@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 11:28:52 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:11:32 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
-# define ITER_MAX 500
+# define ITER_MAX 100
 # define MARGIN 0.03
 
 typedef struct s_pixel
@@ -126,5 +126,8 @@ int			ft_strcmp(const char *s1, const char *s2);
 void		ft_draw_triangle(t_fractal *fr, t_point a, t_point b, t_point c);
 t_complex	ft_julia_set_c(char i);
 void		ft_bresenham(t_point a, t_point b, t_fractal *fractal);
+void		ft_joystick_pinsky(void *param);
+void		ft_mlx_update(t_fractal *fr);
+void		ft_colorize(t_fractal *fr, t_point a, double t);
 
 #endif
