@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 10:59:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:43:01 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int	sierpinsky_init(t_fractal *fractal, const char *name)
 	fractal->iter_max = 9;
 	fractal->z = 1;
 	fractal->x = 0;
+	fractal->rgb[0] = 0;
+	fractal->rgb[1] = 1;
+	fractal->rgb[2] = 2;
 	ft_abc(fractal);
 	return (EXIT_SUCCESS);
 }

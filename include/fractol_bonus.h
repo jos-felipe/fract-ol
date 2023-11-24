@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 13:58:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:11:32 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ t_complex	ft_julia_set_c(char i);
 void		ft_bresenham(t_point a, t_point b, t_fractal *fractal);
 void		ft_joystick_pinsky(void *param);
 void		ft_mlx_update(t_fractal *fr);
+void		ft_colorize(t_fractal *fr, t_point a, double t);
 
 #endif

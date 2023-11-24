@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:48:30 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 19:46:15 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:13:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ void	ft_bresenham_h(t_point a, int32_t dx, int32_t dy, t_fractal *fr)
 				a.y = a.y + 1;
 			dis = dis + 2 * (abs(dy) - abs(dx));
 		}
-		if (!ft_pt_validation(a))
-			mlx_put_pixel(fr->canvas, a.x, a.y, 0xFFFFFFF);
+		ft_colorize(fr, a, (double)i / abs(dy));
 	}
 }
 
-void	ft_bresenham_v(t_point a, int32_t dx, int32_t dy, t_fractal *fractal)
+void	ft_bresenham_v(t_point a, int32_t dx, int32_t dy, t_fractal *fr)
 {
 	int32_t	dis;
 	int32_t	i;
@@ -70,8 +69,7 @@ void	ft_bresenham_v(t_point a, int32_t dx, int32_t dy, t_fractal *fractal)
 				a.x = a.x + 1;
 			dis = dis + 2 * (abs(dx) - abs(dy));
 		}
-		if (!ft_pt_validation(a))
-			mlx_put_pixel(fractal->canvas, a.x, a.y, 0xFFFFFFFF);
+		ft_colorize(fr, a, (double)i / abs(dy));
 	}
 }
 
