@@ -21,7 +21,8 @@ SRCS_BONUS	:=	hooks_bonus.c	\
 				sets_bonus.c	\
 				utils_bonus.c	\
 				sierpinsky_bonus.c	\
-				drawing_tools_bonus.c
+				drawing_tools_bonus.c	\
+				hooks_pinsky_bonus.c
 
 SRCS_PATH		:= $(addprefix ./src/,$(SRCS))
 SRCS_BONUS_PATH	:= $(addprefix ./src_bonus/,$(SRCS_BONUS))
