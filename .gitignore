@@ -4,6 +4,7 @@
 .vscode/
 *.d
 fractol
+fractol_bonus
 .DS_Store
 ```
 .vscode/tasks.json

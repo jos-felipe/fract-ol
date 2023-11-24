@@ -1,32 +1,33 @@
 NAME		:= fractol
 NAME_BONUS	:= fractol_bonus
 
-CFLAGS	:= -Ofast
+CFLAGS	:= -Wall -Wextra -Werror -Ofast
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRCS		:=	./src/hooks.c	\
-				./src/inits.c	\
-				./src/main.c	\
-				./src/sets.c	\
-				./src/utils.c	\
-				./src/sierpinsky.c	\
-				./src/drawing_tools.c
+SRCS		:=	hooks.c	\
+				inits.c	\
+				main.c	\
+				sets.c	\
+				utils.c	\
+				sierpinsky.c	\
+				drawing_tools.c
 
-SRCS_BONUS	:=	./src_bonus/hooks_bonus.c	\
-				./src_bonus/inits_bonus.c	\
-				./src_bonus/main_bonus.c	\
-				./src_bonus/sets_bonus.c	\
-				./src_bonus/utils_bonus.c	\
-				./src_bonus/sierpinsky_bonus.c	\
-				./src_bonus/drawing_tools_bonus.c
+SRCS_BONUS	:=	hooks_bonus.c	\
+				inits_bonus.c	\
+				main_bonus.c	\
+				sets_bonus.c	\
+				utils_bonus.c	\
+				sierpinsky_bonus.c	\
+				drawing_tools_bonus.c
 
-# SOURCES		:= $(addprefix ./sources/,$(SOURCES))
-OBJS		:= ${SRCS:.c=.o}
-OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
+SRCS_PATH		:= $(addprefix ./src/,$(SRCS))
+SRCS_BONUS_PATH	:= $(addprefix ./src_bonus/,$(SRCS_BONUS))
 
+OBJS		:= ${SRCS_PATH:.c=.o}
+OBJS_BONUS	:= ${SRCS_BONUS_PATH:.c=.o}
 
 all: libmlx $(NAME)
 

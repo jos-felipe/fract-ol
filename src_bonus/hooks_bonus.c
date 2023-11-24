@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 20:28:23 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:58:56 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fractol_bonus.h"
+#include "../include/fractol_bonus.h"
 
 void	ft_zoom(double xdelta, double ydelta, void *param)
 {

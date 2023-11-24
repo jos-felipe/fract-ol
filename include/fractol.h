@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 20:39:05 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:51:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-// # include "../lib/libft/libft.h"
 
 # define TRUE 1
 # define FALSE 0
