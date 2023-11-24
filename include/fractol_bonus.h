@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 10:38:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:28:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_sierpinsky
  * @param canvas A pointer to the canvas instance
  * @param pinsky A Sierpinsky object 
  */
-
 typedef struct s_fractal
 {
 	const char		*name;
@@ -101,6 +100,14 @@ int			julia_init(t_fractal *fractal, const char *name);
 int			sierpinsky_init(t_fractal *fractal, const char *name);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal);
+/**
+* @brief Transforms the current pixel position into a point on the z-plane.
+* The linear transformation uses the line equation form of y = a * x + b.
+* The y-axis is inverted to match the z-plane's orientation.
+* @param z The complex variable which receives the transformed coordinates
+* @param fractal The fractal instance
+* @param pixel The current pixel
+*/
 void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
