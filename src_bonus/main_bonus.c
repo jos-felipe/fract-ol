@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:13:16 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 15:00:07 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:03:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ int	main(int argc, const char *argv[])
 	{
 		mlx_loop_hook(fr.mlx, ft_classic_artist, &fr);
 		mlx_scroll_hook(fr.mlx, ft_abc_zoom, &fr);
+		mlx_loop_hook(fr.mlx, ft_joystick_pinsky, &fr);
 	}
 	else
 	{
 		mlx_loop_hook(fr.mlx, ft_artist, &fr);
 		mlx_scroll_hook(fr.mlx, ft_zoom, &fr);
+		mlx_loop_hook(fr.mlx, ft_joystick, &fr);
 	}
-	mlx_loop_hook(fr.mlx, ft_joystick, &fr);
 	mlx_loop(fr.mlx);
 	mlx_terminate(fr.mlx);
 	return (EXIT_SUCCESS);
