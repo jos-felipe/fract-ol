@@ -6,20 +6,23 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 11:53:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:28:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_BONUS_H
 # define FRACTOL_BONUS_H
 
+# include <unistd.h>
+# include <stdlib.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "../lib/libft/libft.h"
 
 # define TRUE 1
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
+# define ITER_MAX 500
+# define MARGIN 0.03
 
 typedef struct s_pixel
 {
@@ -34,12 +37,25 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_channel
 {
 	uint32_t	r;
 	uint32_t	g;
 	uint32_t	b;
 }	t_channel;
+
+typedef struct s_sierpinsky
+{
+	t_point	a;
+	t_point	b;
+	t_point	c;
+}	t_sierpinsky;
 
 /**
  * @brief A structure to store the characteristics of the fractal
@@ -55,6 +71,7 @@ typedef struct s_channel
  * @param j The Julia constant selector
  * @param mlx A pointer to the window instance
  * @param canvas A pointer to the canvas instance
+ * @param pinsky A Sierpinsky object 
  */
 typedef struct s_fractal
 {
@@ -71,24 +88,43 @@ typedef struct s_fractal
 	int				j;
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	t_sierpinsky	pinsky;
+	double			z;
 }	t_fractal;
 
 uint32_t	ft_mandelbrot(t_fractal *fractal, t_complex *c);
 uint32_t	ft_julia(t_fractal *fractal, t_complex *z);
+void		ft_sierpinsky(t_point abc[], int n, t_fractal *fr);
 int			mandelbrot_init(t_fractal *fractal, const char *name);
 int			julia_init(t_fractal *fractal, const char *name);
-void		julia_sets(t_complex *c, int i);
+int			sierpinsky_init(t_fractal *fractal, const char *name);
 int			ft_args(t_fractal *fractal, int argc, const char *argv[]);
 int			graphics_init(t_fractal *fractal);
+/**
+* @brief Transforms the current pixel position into a point on the z-plane.
+* The linear transformation uses the line equation form of y = a * x + b.
+* The y-axis is inverted to match the z-plane's orientation.
+* @param z The complex variable which receives the transformed coordinates
+* @param fractal The fractal instance
+* @param pixel The current pixel
+*/
 void		ztrans(t_complex *z, t_fractal *fractal, t_pixel *pixel);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
 void		ft_joystick(void *param);
-void		ft_julia_c(t_fractal *fractal);
 int32_t		ft_bernstein_poly(double t, int *rgb);
 void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
 void		ft_puts(const char *str);
 void		ft_croupier(t_fractal *fr);
+t_point		ft_middle(t_point a, t_point b);
+void		ft_classic_artist(void *param);
+void		ft_abc(t_fractal *fr);
+void		ft_abc_zoom(double xdelta, double ydelta, void *param);
+int			ft_pt_validation(t_point a);
+int			ft_strcmp(const char *s1, const char *s2);
+void		ft_draw_triangle(t_fractal *fr, t_point a, t_point b, t_point c);
+t_complex	ft_julia_set_c(char i);
+void		ft_bresenham(t_point a, t_point b, t_fractal *fractal);
 
 #endif

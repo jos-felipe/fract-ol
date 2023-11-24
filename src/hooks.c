@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 13:50:41 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:39:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,44 @@ void	ft_zoom(double xdelta, double ydelta, void *param)
 	fractal->a = fractal->axis_len / SIZE;
 }
 
+void	ft_scroll_in(t_fractal *fr, int32_t width, int32_t height)
+{
+	fr->pinsky.a.x -= (width - fr->pinsky.a.x) / 10;
+	fr->pinsky.a.y -= (height - fr->pinsky.a.y) / 10;
+	fr->pinsky.b.x -= (width - fr->pinsky.b.x) / 10;
+	fr->pinsky.b.y -= (height - fr->pinsky.b.y) / 10;
+	fr->pinsky.c.x -= (width - fr->pinsky.c.x) / 10;
+	fr->pinsky.c.y -= (height - fr->pinsky.c.y) / 10;
+}
+
+void	ft_scroll_out(t_fractal *fr, int32_t width, int32_t height)
+{
+	fr->pinsky.a.x += (width - fr->pinsky.a.x) / 10;
+	fr->pinsky.a.y += (height - fr->pinsky.a.y) / 10;
+	fr->pinsky.b.x += (width - fr->pinsky.b.x) / 10;
+	fr->pinsky.b.y += (height - fr->pinsky.b.y) / 10;
+	fr->pinsky.c.x += (width - fr->pinsky.c.x) / 10;
+	fr->pinsky.c.y += (height - fr->pinsky.c.y) / 10;
+}
+
+void	ft_abc_zoom(double xdelta, double ydelta, void *param)
+{
+	t_fractal	*fr;
+	int32_t		width;
+	int32_t		height;
+
+	xdelta = 0;
+	fr = param;
+	mlx_get_mouse_pos(fr->mlx, &width, &height);
+	if (ydelta > 0)
+		ft_scroll_in(fr, width, height);
+	else if (ydelta < 0)
+		ft_scroll_out(fr, width, height);
+	mlx_delete_image(fr->mlx, fr->canvas);
+	fr->canvas = mlx_new_image(fr->mlx, SIZE, SIZE);
+	mlx_image_to_window(fr->mlx, fr->canvas, 0, 0);
+}
+
 void	ft_joystick(void *param)
 {	
 	t_fractal	*fractal;
@@ -49,8 +87,14 @@ void	ft_joystick(void *param)
 		mlx_close_window(fractal->mlx);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_SPACE))
 		ft_croupier(fractal);
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_C))
-		ft_julia_c(fractal);
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_F1))
+		fractal->c = ft_julia_set_c('a');
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_F2))
+		fractal->c = ft_julia_set_c('b');
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_F3))
+		fractal->c = ft_julia_set_c('c');
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_F4))
+		fractal->c = ft_julia_set_c('d');
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
 		fractal->b.y += fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
@@ -59,12 +103,4 @@ void	ft_joystick(void *param)
 		fractal->b.x -= fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
 		fractal->b.x += fractal->a * STEP;
-}
-
-void	ft_julia_c(t_fractal *fractal)
-{
-	fractal->j++;
-	if (fractal->j == 4)
-		fractal->j = 0;
-	julia_sets(&fractal->c, fractal->j);
 }

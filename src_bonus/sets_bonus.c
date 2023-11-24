@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:38:05 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 18:17:16 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:12:36 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,49 @@ uint32_t	ft_julia(t_fractal *fractal, t_complex *z)
 	return (color);
 }
 
-void	julia_sets(t_complex *c, int i)
+void	ft_sierpinsky(t_point abc[], int n, t_fractal *fr)
 {
-	t_complex	tmp[4];
+	t_point	tmp[3];
+
+	tmp[0] = abc[0];
+	tmp[1] = abc[1];
+	tmp[2] = abc[2];
+	if (n > 0)
+	{
+		ft_draw_triangle(fr, tmp[0], tmp[1], tmp[2]);
+		abc[0] = tmp[0];
+		abc[1] = ft_middle(tmp[0], tmp[1]);
+		abc[2] = ft_middle(tmp[0], tmp[2]);
+		ft_sierpinsky(abc, n - 1, fr);
+		abc[0] = ft_middle(tmp[0], tmp[1]);
+		abc[1] = tmp[1];
+		abc[2] = ft_middle(tmp[1], tmp[2]);
+		ft_sierpinsky(abc, n - 1, fr);
+		abc[0] = ft_middle(tmp[0], tmp[2]);
+		abc[1] = ft_middle(tmp[1], tmp[2]);
+		abc[2] = tmp[2];
+		ft_sierpinsky(abc, n - 1, fr);
+	}
+}
+
+t_complex	ft_julia_set_c(char i)
+{
+	t_complex	tmp[5];
+	t_complex	c;
 
 	ft_complex(&tmp[0], -0.7, 0.27015);
 	ft_complex(&tmp[1], 0.285, 0.01);
 	ft_complex(&tmp[2], -0.8, 0.156);
 	ft_complex(&tmp[3], 0.4, 0.4);
-	if (i < 0 || i > 3)
-		return ;
-	c->x = tmp[i].x;
-	c->y = tmp[i].y;
+	ft_complex(&tmp[4], -0.4, 0.6);
+	c = tmp[4];
+	if (i == 'a')
+		c = tmp[0];
+	if (i == 'b')
+		c = tmp[1];
+	else if (i == 'c')
+		c = tmp[2];
+	else if (i == 'd')
+		c = tmp[3];
+	return (c);
 }

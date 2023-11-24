@@ -1,6 +1,13 @@
 *.out
 *.o
 *.pdf
-.vscode
+.vscode/
 *.d
-*
+fractol
+fractol_bonus
+.DS_Store
+```
+.vscode/tasks.json
+.vscode/launch.json
+_src/
+include/_fractol.h

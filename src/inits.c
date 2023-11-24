@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:05:39 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/16 13:50:32 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:39:43 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ int	mandelbrot_init(t_fractal *fractal, const char *name)
 {
 	fractal->name = name;
 	fractal->f = ft_mandelbrot;
-	fractal->iter_max = 100;
+	fractal->iter_max = ITER_MAX;
 	fractal->axis_len = 4.0;
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
 	fractal->b.y = 0.0 + fractal->axis_len / 2.0;
-	fractal->ch.r = 0;
-	fractal->ch.g = 1;
-	fractal->ch.b = 2;
 	fractal->rgb[0] = 0;
 	fractal->rgb[1] = 1;
 	fractal->rgb[2] = 2;
@@ -35,20 +32,26 @@ int	julia_init(t_fractal *fractal, const char *name)
 {	
 	fractal->name = name;
 	fractal->f = ft_julia;
-	fractal->iter_max = 100;
+	fractal->iter_max = ITER_MAX;
 	fractal->axis_len = 4.0;
 	fractal->a = fractal->axis_len / SIZE;
 	fractal->b.x = 0.0 - fractal->axis_len / 2.0;
 	fractal->b.y = 0.0 + fractal->axis_len / 2.0;
-	fractal->ch.r = 0;
-	fractal->ch.g = 1;
-	fractal->ch.b = 2;
 	fractal->rgb[0] = 0;
 	fractal->rgb[1] = 1;
 	fractal->rgb[2] = 2;
 	fractal->x = 0;
-	fractal->j = 0;
-	julia_sets(&fractal->c, fractal->j);
+	fractal->c = ft_julia_set_c('0');
+	return (EXIT_SUCCESS);
+}
+
+int	sierpinsky_init(t_fractal *fractal, const char *name)
+{	
+	fractal->name = name;
+	fractal->iter_max = 9;
+	fractal->z = 1;
+	fractal->x = 0;
+	ft_abc(fractal);
 	return (EXIT_SUCCESS);
 }
 
@@ -59,23 +62,23 @@ int	ft_args(t_fractal *fractal, int argc, const char *argv[])
 	status = EXIT_FAILURE;
 	if (argc > 1)
 	{
-		if (!ft_strncmp(argv[1], "Mandelbrot", 10))
+		if (!ft_strcmp(argv[1], "Mandelbrot"))
 			status = mandelbrot_init(fractal, argv[1]);
-		else if (!ft_strncmp(argv[1], "Julia", 5))
+		else if (!ft_strcmp(argv[1], "Julia"))
 		{
 			status = julia_init(fractal, argv[1]);
 			if (argc > 2)
-				julia_sets(&fractal->c, ft_atoi(argv[2]) - 1);
+				fractal->c = ft_julia_set_c(argv[2][0]);
 		}	
-		else if (!ft_strncmp(argv[1], "burningship", 11))
-			status = EXIT_SUCCESS;
+		else if (!ft_strcmp(argv[1], "Sierpinsky"))
+			status = sierpinsky_init(fractal, argv[1]);
 	}
 	return (status);
 }
 
 int	graphics_init(t_fractal *fractal)
 {
-	fractal->mlx = mlx_init(SIZE, SIZE, fractal->name, false);
+	fractal->mlx = mlx_init(SIZE, SIZE, fractal->name, FALSE);
 	if (!fractal->mlx)
 	{
 		ft_puts(mlx_strerror(mlx_errno));
