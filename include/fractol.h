@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:38 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 11:30:19 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:57:05 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define FALSE 0
 # define SIZE 720
 # define STEP 36
-# define ITER_MAX 500
+# define ITER_MAX 100
 # define MARGIN 0.03
 
 typedef struct s_pixel
@@ -113,7 +113,6 @@ int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		ft_zoom(double xdelta, double ydelta, void *param);
 void		ft_joystick(void *param);
 int32_t		ft_bernstein_poly(double t, int *rgb);
-void		ft_shift(t_channel *ch);
 void		ft_complex(t_complex *z, double x, double y);
 void		ft_puts(const char *str);
 void		ft_croupier(t_fractal *fr);
