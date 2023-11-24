@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:59 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/24 11:28:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:33:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ int32_t	ft_bernstein_poly(double t, int *rgb)
 	poly[rgb[1]] = 255 * 9 * (1 - t) * t * t * t;
 	poly[rgb[2]] = 255 * 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
 	return (ft_pixel(poly[0], poly[1], poly[2], 255));
-}
-
-void	ft_shift(t_channel *ch)
-{
-	int32_t	tmp;
-
-	tmp = ch->r;
-	ch->r = ch->g;
-	ch->g = ch->b;
-	ch->b = tmp;
 }
 
 void	ft_complex(t_complex *z, double x, double y)

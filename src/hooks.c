@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:17:46 by josfelip          #+#    #+#             */
-/*   Updated: 2023/11/21 20:39:34 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:22:27 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	ft_joystick(void *param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_F4))
 		fractal->c = ft_julia_set_c('d');
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_UP))
-		fractal->b.y += fractal->a * STEP;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
 		fractal->b.y -= fractal->a * STEP;
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_DOWN))
+		fractal->b.y += fractal->a * STEP;
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_LEFT))
-		fractal->b.x -= fractal->a * STEP;
-	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
 		fractal->b.x += fractal->a * STEP;
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_RIGHT))
+		fractal->b.x -= fractal->a * STEP;
 }

@@ -1,7 +1,7 @@
 NAME		:= fractol
 NAME_BONUS	:= fractol_bonus
 
-CFLAGS	:= -Wall -Wextra -Werror -Ofast
+CFLAGS	:= -Wall -Wextra -Werror -MMD -MP -Ofast
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
@@ -30,6 +30,9 @@ SRCS_BONUS_PATH	:= $(addprefix ./src_bonus/,$(SRCS_BONUS))
 OBJS		:= ${SRCS_PATH:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS_PATH:.c=.o}
 
+DEP			= $(OBJS:.o=.d)
+DEP_BONUS	= $(OBJS_BONUS:.o=.d)
+
 all: libmlx $(NAME)
 
 bonus: libmlx $(NAME_BONUS)
@@ -45,11 +48,16 @@ libmlx:
 $(NAME): $(OBJS) 
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
+-include $(DEP)
+
 $(NAME_BONUS): $(OBJS_BONUS)
 	@$(CC) $(OBJS_BONUS) $(LIBS) $(HEADERS) -o $(NAME_BONUS)
 
+-include $(DEP_BONUS)
+
 clean:
 	@rm -rf $(OBJS) $(OBJS_BONUS)
+	@rm -rf $(DEP) $(DEP_BONUS)
 
 fclean: clean
 	@rm -rf $(NAME) $(NAME_BONUS)
